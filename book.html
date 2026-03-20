@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment — Hanson Insurance Agency</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:640px;">
+      <h1>Book a free appointment.</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.8);margin-top:16px;">No pressure. No fees. Just honest guidance from a real agent. Pick a time that works for you and Emily or a team member will be ready.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+
+      <!-- Calendly embed placeholder -->
+      <div>
+        <div class="section-label">Book Online</div>
+        <h2>Pick a time that works for you.</h2>
+        <p style="margin-top:12px;color:var(--color-ink-mid);">Select the topic that best matches your needs — Emily and her team are ready to help with Medicare, health insurance, and life insurance.</p>
+
+        <!-- Topic selector -->
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px;">
+          <div class="card" style="cursor:pointer;border:2px solid var(--medicare-primary);background:var(--medicare-light);" onclick="this.style.borderWidth='3px'">
+            <div style="display:flex;gap:12px;align-items:center;">
+              <div><img src="logos/clubmedicare.png" alt="Club Medicare" style="height:36px;width:36px;border-radius:50%;"></div>
+              <div>
+                <h5 style="color:var(--medicare-dark);">Club Medicare</h5>
+                <p style="font-size:.85rem;color:var(--medicare-dark);opacity:.8;">Medicare enrollment, plan comparison, or annual review</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--health-primary)';this.style.borderWidth='2px'">
+            <div style="display:flex;gap:12px;align-items:center;">
+              <div><img src="logos/Logo Club HEALTH.png" alt="Club Health" style="height:36px;width:36px;border-radius:50%;"></div>
+              <div>
+                <h5 style="color:var(--health-dark);">Club Health</h5>
+                <p style="font-size:.85rem;color:var(--color-ink-mid);">Individual, family, ACA Marketplace, or self-employed coverage</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--life-primary)';this.style.borderWidth='2px'">
+            <div style="display:flex;gap:12px;align-items:center;">
+              <div><img src="logos/clublife.png" alt="Club Life" style="height:36px;width:36px;border-radius:50%;"></div>
+              <div>
+                <h5 style="color:var(--life-dark);">Club Life</h5>
+                <p style="font-size:.85rem;color:var(--color-ink-mid);">Term, whole, final expense, or universal life insurance</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--color-ink)';this.style.borderWidth='2px'">
+            <div style="display:flex;gap:12px;align-items:center;">
+              <div style="font-size:1.5rem;">💬</div>
+              <div>
+                <h5>General Question</h5>
+                <p style="font-size:.85rem;color:var(--color-ink-mid);">Not sure where to start? Emily will point you in the right direction.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendly placeholder -->
+        <div style="margin-top:32px;background:var(--color-card);border:2px dashed var(--color-rule);border-radius:12px;padding:48px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:16px;">📅</div>
+          <h4>Calendly Booking Calendar</h4>
+          <p style="margin-top:8px;font-size:.9rem;color:var(--color-ink-mid);">The Calendly embed will appear here. Replace this placeholder with Emily's Calendly embed code.</p>
+          <a href="https://calendly.com" target="_blank" class="btn btn-dark" style="margin-top:16px;">Open Calendly →</a>
+        </div>
+      </div>
+
+      <!-- Right: contact + reassurance -->
+      <div>
+        <div class="card" style="margin-bottom:24px;">
+          <h4>Prefer to call or email?</h4>
+          <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px;">
+            <a href="tel:5128176906" style="display:flex;gap:12px;align-items:center;text-decoration:none;">
+              <div style="width:44px;height:44px;background:var(--medicare-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📞</div>
+              <div>
+                <div style="font-weight:600;color:var(--color-ink);">512-817-6906</div>
+                <div style="font-size:.8rem;color:var(--color-ink-light);">Click to call on mobile</div>
+              </div>
+            </a>
+            <a href="mailto:Emily@HansonFirst.com" style="display:flex;gap:12px;align-items:center;text-decoration:none;">
+              <div style="width:44px;height:44px;background:var(--health-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">✉️</div>
+              <div>
+                <div style="font-weight:600;color:var(--color-ink);">Emily@HansonFirst.com</div>
+                <div style="font-size:.8rem;color:var(--color-ink-light);">We respond within 1 business day</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <h4>Office hours</h4>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem;">
+            <div style="display:flex;justify-content:space-between;">
+              <span style="color:var(--color-ink-mid);">Monday – Friday</span>
+              <span style="font-weight:600;">9:00 AM – 5:30 PM CT</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="color:var(--color-ink-mid);">Saturday</span>
+              <span style="font-weight:600;">By appointment</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="color:var(--color-ink-mid);">Sunday</span>
+              <span style="font-weight:600;">Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-medicare">
+          <div class="callout-icon">💚</div>
+          <div>
+            <h4 style="color:var(--medicare-dark);">No pressure. Ever.</h4>
+            <p style="color:var(--medicare-dark);opacity:.85;">"No pressure. No fees. Just honest guidance from a real agent." There is never any obligation to enroll, and our guidance costs you nothing regardless of what you decide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-sticky-cta" id="mobile-sticky"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>

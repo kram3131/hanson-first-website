@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forms Hub — Hanson Insurance Agency</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:640px;">
+      <h1>Forms Hub</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.8);margin-top:16px;">All your Hanson Insurance forms in one place. HIPAA-protected, secure, and simple.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="hipaa-notice" style="max-width:700px;margin-bottom:48px;">
+      <span class="hipaa-icon">🔒</span>
+      <div>
+        <strong>HIPAA Notice:</strong> All forms on this page collect information in compliance with HIPAA privacy regulations. Your health information is encrypted, protected, and used solely to provide insurance guidance. We will never share your information without your explicit consent.
+      </div>
+    </div>
+
+    <div class="grid-3">
+
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+        <h4>Update / Change Form</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Need to update your contact information, beneficiary, or plan details? Use this form to submit changes to your existing policy.</p>
+        <a href="#update-form" class="btn btn-dark btn-sm" style="margin-top:16px;">Complete Form →</a>
+      </div>
+
+      <div class="card" style="text-align:center;border-top:4px solid var(--medicare-primary);">
+        <div style="font-size:2rem;margin-bottom:12px;">🤝</div>
+        <div class="badge badge-medicare" style="margin-bottom:8px;">Club Medicare</div>
+        <h4>Scope of Appointment (SOA)</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Required by CMS before discussing Medicare Advantage or Part D plans. Complete this form before your Medicare consultation.</p>
+        <a href="#soa-form" class="btn btn-medicare btn-sm" style="margin-top:16px;">Complete SOA →</a>
+      </div>
+
+      <div class="card" style="text-align:center;border-top:4px solid var(--health-primary);">
+        <div style="margin-bottom:12px;"><img src="logos/Logo Club HEALTH.png" alt="Club Health" style="height:48px;width:48px;border-radius:50%;"></div>
+        <div class="badge badge-health" style="margin-bottom:8px;">Club Health</div>
+        <h4>Health Insurance Quote Request</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Request a health insurance quote for individual, family, or ACA Marketplace plans.</p>
+        <a href="club-health/quote.html" class="btn btn-health btn-sm" style="margin-top:16px;">Request Quote →</a>
+      </div>
+
+      <div class="card" style="text-align:center;border-top:4px solid var(--life-primary);">
+        <div style="margin-bottom:12px;"><img src="logos/clublife.png" alt="Club Life" style="height:48px;width:48px;border-radius:50%;"></div>
+        <div class="badge badge-life" style="margin-bottom:8px;">Club Life</div>
+        <h4>Life Insurance Quote Request</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Request a life insurance quote for term, whole, final expense, or universal life coverage.</p>
+        <a href="club-life/quote.html" class="btn btn-life btn-sm" style="margin-top:16px;">Request Quote →</a>
+      </div>
+
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">📬</div>
+        <h4>General Contact Form</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Have a question that doesn't fit neatly into one category? Send us a message and we'll get back to you within 1 business day.</p>
+        <a href="#contact-form" class="btn btn-outline btn-sm" style="margin-top:16px;">Send Message →</a>
+      </div>
+
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">📰</div>
+        <h4>Newsletter Signup</h4>
+        <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Quarterly updates on Medicare, health insurance, and life insurance. No spam. Unsubscribe anytime.</p>
+        <a href="#newsletter" class="btn btn-outline btn-sm" style="margin-top:16px;">Subscribe →</a>
+      </div>
+
+    </div>
+
+    <!-- SOA Form -->
+    <div id="soa-form" style="margin-top:80px;">
+      <div class="section-header">
+        <div class="badge badge-medicare" style="margin-bottom:12px;">Club Medicare · Required</div>
+        <h2>Scope of Appointment (SOA)</h2>
+        <p>CMS regulations require a Scope of Appointment form to be completed before discussing Medicare Advantage (Part C) or Medicare Prescription Drug (Part D) plans. This form confirms the topics you'd like to discuss.</p>
+      </div>
+      <div class="card" style="margin-top:32px;max-width:700px;">
+        <div class="hipaa-notice">
+          <span class="hipaa-icon">🔒</span>
+          <div>This form is HIPAA-compliant. Your information is protected and used solely for the purpose of scheduling your Medicare consultation.</div>
+        </div>
+        <form onsubmit="this.innerHTML='<div style=\'text-align:center;padding:32px;\'>✅ <strong>SOA submitted!</strong> Emily will confirm your appointment shortly.</div>';return false;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              <input class="form-input" type="text" required placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              <input class="form-input" type="text" required placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Phone *</label>
+              <input class="form-input" type="tel" required placeholder="(512) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date of Birth</label>
+              <input class="form-input" type="date" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Topics you'd like to discuss (check all that apply)</label>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+              <label class="checkbox-group"><input type="checkbox" /> <span>Medicare Advantage (Part C)</span></label>
+              <label class="checkbox-group"><input type="checkbox" /> <span>Medicare Supplement / Medigap</span></label>
+              <label class="checkbox-group"><input type="checkbox" /> <span>Medicare Prescription Drug Plans (Part D)</span></label>
+              <label class="checkbox-group"><input type="checkbox" /> <span>Special Needs Plans (C-SNP or D-SNP)</span></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Preferred Appointment Date &amp; Time</label>
+            <input class="form-input" type="text" placeholder="e.g. April 15, any morning" />
+          </div>
+          <div class="form-group">
+            <label class="checkbox-group">
+              <input type="checkbox" required />
+              <span>I acknowledge that completing this form authorizes Hanson Insurance to contact me to discuss the Medicare plan types I've selected above, in compliance with CMS guidelines.</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-medicare btn-lg" style="width:100%;">Submit Scope of Appointment →</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div id="newsletter" style="margin-top:80px;text-align:center;">
+      <div class="newsletter-wrap">
+        <div class="section-label medicare">Stay Informed</div>
+        <h3>Quarterly Medicare &amp; Health Insurance Updates</h3>
+        <p style="margin-top:8px;font-size:.9rem;">Enrollment deadlines, plan changes, and tips from Emily. Unsubscribe anytime.</p>
+        <form class="newsletter-form" onsubmit="this.innerHTML='<p style=\'padding:12px;color:var(--medicare-dark);font-weight:600;\'>✅ You\'re signed up!</p>';return false;">
+          <input type="email" placeholder="your@email.com" required />
+          <button type="submit" class="btn btn-medicare">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-sticky-cta" id="mobile-sticky"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>

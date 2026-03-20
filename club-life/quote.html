@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Insurance Quote Request — Club Life — Hanson Insurance</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero hero-life page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:640px;">
+      <a href="index.html" class="badge badge-life" style="margin-bottom:16px;">← Club Life</a>
+      <h1>Get a Life Insurance Quote</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.85);margin-top:12px;">Tell us a little about your situation and Emily will find the right coverage for your family — at no cost to you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+
+      <!-- Form -->
+      <div>
+        <div class="hipaa-notice">
+          <span class="hipaa-icon">🔒</span>
+          <div>
+            <strong>HIPAA Notice:</strong> The information you provide is protected under HIPAA. We use it solely to provide insurance guidance and will never share it without your consent.
+          </div>
+        </div>
+        <form onsubmit="this.innerHTML='<div style=\'text-align:center;padding:48px 0;\'><div style=\'font-size:3rem;\'>✅</div><h3 style=\'margin-top:16px;\'>Thank you!</h3><p style=\'margin-top:12px;\'>Emily will be in touch within 1 business day. For faster service, call <a href=\'tel:5128176906\' style=\'color:var(--life-primary);font-weight:600;\'>512-817-6906</a>.</p></div>';return false;">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="lq-fname">First Name *</label>
+              <input class="form-input" type="text" id="lq-fname" required placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lq-lname">Last Name *</label>
+              <input class="form-input" type="text" id="lq-lname" required placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="lq-dob">Date of Birth *</label>
+              <input class="form-input" type="date" id="lq-dob" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lq-phone">Phone Number</label>
+              <input class="form-input" type="tel" id="lq-phone" placeholder="(512) 000-0000" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lq-health">General Health Status</label>
+            <select class="form-select" id="lq-health">
+              <option value="">Select one…</option>
+              <option>Excellent — no significant health conditions</option>
+              <option>Good — minor conditions, well managed</option>
+              <option>Fair — some ongoing health conditions</option>
+              <option>Poor — significant health conditions</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="lq-amount">Coverage Amount Interested In</label>
+              <select class="form-select" id="lq-amount">
+                <option>$5,000–$25,000 (Final Expense)</option>
+                <option>$25,000–$100,000</option>
+                <option>$100,000–$250,000</option>
+                <option>$250,000–$500,000</option>
+                <option>$500,000+</option>
+                <option>Not sure — need guidance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lq-type">Type of Coverage Interested In</label>
+              <select class="form-select" id="lq-type">
+                <option>Not sure — need guidance</option>
+                <option>Term Life</option>
+                <option>Whole Life</option>
+                <option>Final Expense / Burial</option>
+                <option>Universal Life</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lq-calltime">Best Time to Reach You</label>
+            <select class="form-select" id="lq-calltime">
+              <option>Morning (8am–12pm)</option>
+              <option>Afternoon (12pm–5pm)</option>
+              <option>Evening (5pm–7pm)</option>
+              <option>Anytime</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lq-notes">Anything else we should know?</label>
+            <textarea class="form-textarea" id="lq-notes" placeholder="Who you want to protect, any specific concerns, questions you have…"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-group">
+              <input type="checkbox" required />
+              <span>I consent to being contacted by Hanson Insurance Agency regarding my life insurance inquiry.</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-life btn-lg" style="width:100%;">Submit Quote Request →</button>
+        </form>
+      </div>
+
+      <!-- Right sidebar -->
+      <div>
+        <div class="card" style="margin-bottom:24px;">
+          <h4>Common myths — busted</h4>
+          <div class="accordion-item" style="margin-top:16px;">
+            <div class="accordion-header">"Life insurance is too expensive." <span class="accordion-icon">+</span></div>
+            <div class="accordion-body">A healthy 35-year-old can often get a $500,000 20-year term policy for less than $30/month. Final expense policies for seniors often run $40–$80/month. Emily will find the most affordable option for your situation.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">"I'm too old to get life insurance." <span class="accordion-icon">+</span></div>
+            <div class="accordion-body">You can typically get final expense and guaranteed issue policies well into your 80s. The premiums are higher as you age, but coverage is still available. Don't assume it's out of reach — let Emily find out.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">"I have coverage through work — I'm fine." <span class="accordion-icon">+</span></div>
+            <div class="accordion-body">Employer life insurance typically covers only 1–2x your annual salary — often far less than what your family would need. And it usually doesn't follow you if you leave the company. An individual policy gives you portable, permanent protection.</div>
+          </div>
+        </div>
+
+        <div class="callout callout-life">
+          <div class="callout-icon"><img src="../logos/clublife.png" alt="Club Life" style="height:40px;width:40px;border-radius:50%;"></div>
+          <div>
+            <h4 style="color:var(--life-dark);">Prefer to talk now?</h4>
+            <p style="color:var(--life-dark);opacity:.85;">Call <a href="tel:5128176906" style="color:var(--life-dark);font-weight:700;">512-817-6906</a> or <a href="../book.html" style="color:var(--life-dark);font-weight:700;">book a time on Emily's calendar</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-sticky-cta" id="mobile-sticky"></div>
+<script src="../assets/components.js"></script>
+</body>
+</html>

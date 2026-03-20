@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACA Marketplace Plans — Club Health — Hanson Insurance</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero hero-health page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:680px;">
+      <a href="index.html" class="badge badge-health" style="margin-bottom:16px;">← Club Health</a>
+      <h1>ACA Marketplace Plans</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.85);margin-top:12px;">Federal and state exchange plans with potential premium tax credits. We help you find the best plan and every dollar of subsidy you qualify for — at no cost to you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-label health">What Are ACA Plans?</div>
+        <h2>Health insurance through the Marketplace — often with subsidy assistance.</h2>
+        <p style="margin-top:16px;">The Affordable Care Act (ACA) created federal and state Health Insurance Marketplaces where individuals and families can purchase comprehensive health coverage. Depending on your income, you may qualify for a <strong>Premium Tax Credit (PTC)</strong> that significantly reduces what you pay each month.</p>
+        <p style="margin-top:12px;">All ACA plans must cover essential health benefits — including preventive care, emergency services, hospitalization, prescription drugs, and mental health services — and cannot deny coverage for pre-existing conditions.</p>
+        <p style="margin-top:12px;">Emily's job is to find the plan that gives you the right coverage at the right price, and to make sure you're receiving every subsidy dollar you're entitled to.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--health-primary);">
+        <h4 style="color:var(--health-dark);margin-bottom:20px;">ACA Metal Tiers at a Glance</h4>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="background:#f5f0e8;border-radius:8px;padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:#7d5a1e;">🥉 Bronze</strong>
+              <span style="font-size:.8rem;color:#7d5a1e;">Lowest premium / highest out-of-pocket</span>
+            </div>
+            <p style="font-size:.85rem;margin-top:6px;color:var(--color-ink-mid);">Plan pays ~60% of costs. Good if you're young and healthy and mainly need catastrophic protection.</p>
+          </div>
+          <div style="background:#f4f4f4;border-radius:8px;padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:#5a5a5a;">🥈 Silver</strong>
+              <span style="font-size:.8rem;color:#5a5a5a;">Best for subsidy-eligible individuals</span>
+            </div>
+            <p style="font-size:.85rem;margin-top:6px;color:var(--color-ink-mid);">Plan pays ~70%. <strong>Cost-Sharing Reductions (CSR)</strong> are only available on Silver plans — making them often the best value for those who qualify.</p>
+          </div>
+          <div style="background:#fffaf0;border-radius:8px;padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:#b7791f;">🥇 Gold</strong>
+              <span style="font-size:.8rem;color:#b7791f;">Higher premium / lower out-of-pocket</span>
+            </div>
+            <p style="font-size:.85rem;margin-top:6px;color:var(--color-ink-mid);">Plan pays ~80%. Great if you use medical care frequently and want predictable costs.</p>
+          </div>
+          <div style="background:#f0f7ff;border-radius:8px;padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong style="color:#1a4d7a;">💎 Platinum</strong>
+              <span style="font-size:.8rem;color:#1a4d7a;">Highest premium / lowest out-of-pocket</span>
+            </div>
+            <p style="font-size:.85rem;margin-top:6px;color:var(--color-ink-mid);">Plan pays ~90%. Best for people with frequent medical needs who want maximum coverage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Subsidy Calculator ─────────────────────────────────── -->
+<section class="section" style="background:var(--health-light);">
+  <div class="container container-narrow">
+    <div class="section-header text-center">
+      <div class="section-label health">Subsidy Estimator</div>
+      <h2>Do you qualify for a Premium Tax Credit?</h2>
+      <p>Get a quick estimate. Then book with Emily for exact numbers and plan options in your area.</p>
+    </div>
+    <div class="tool-card" style="margin-top:40px;">
+      <form id="subsidy-calc">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="calc-household">Household Size</label>
+            <select class="form-select" id="calc-household">
+              <option value="1">1 person</option>
+              <option value="2" selected>2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people</option>
+              <option value="6">6 people</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="calc-income">Estimated Annual Household Income</label>
+            <input class="form-input" type="number" id="calc-income" placeholder="e.g. 55000" min="0" step="1000" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-health btn-lg" style="width:100%;">Estimate My Subsidy →</button>
+      </form>
+      <div class="tool-result" id="subsidy-result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Enrollment Periods ─────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center">
+      <div class="section-label health">Enrollment Periods</div>
+      <h2>When you can sign up for ACA coverage</h2>
+    </div>
+    <div class="grid-2" style="margin-top:32px;">
+      <div class="card" style="border-top:4px solid var(--health-primary);">
+        <h4 style="color:var(--health-dark);">Open Enrollment Period</h4>
+        <p style="margin-top:8px;font-size:.9rem;">The main window to enroll in or change Marketplace coverage each year. Typically runs November 1 through January 15 for most states (federal Marketplace). Coverage begins January 1 if you enroll by December 15.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--health-mid);">
+        <h4 style="color:var(--health-dark);">Special Enrollment Period (SEP)</h4>
+        <p style="margin-top:8px;font-size:.9rem;">Certain life events let you enroll outside Open Enrollment. Qualifying events include:</p>
+        <ul style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.875rem;color:var(--color-ink-mid);">
+          <li>→ Losing employer health coverage</li>
+          <li>→ Getting married or divorced</li>
+          <li>→ Having or adopting a child</li>
+          <li>→ Moving to a new coverage area</li>
+          <li>→ Losing Medicaid or CHIP eligibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-block cta-block-health">
+      <div class="cta-block-content">
+        <h2>Ready to explore ACA Marketplace plans?</h2>
+        <p>Expert guidance at no charge. We find the plan that fits your life and budget.</p>
+        <div class="cta-block-btns">
+          <a href="../book.html" class="btn btn-white btn-lg">📅 Book Appointment</a>
+          <a href="quote.html"   class="btn btn-white-outline btn-lg">📋 Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-sticky-cta" id="mobile-sticky"></div>
+<script src="../assets/components.js"></script>
+</body>
+</html>

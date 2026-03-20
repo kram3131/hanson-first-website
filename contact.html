@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Hanson Insurance Agency</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:640px;">
+      <h1>Get in touch.</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.8);margin-top:16px;">Whether you have a quick question or are ready to find coverage, we'd love to hear from you. We respond within 1 business day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+
+      <!-- Contact info + form -->
+      <div>
+        <div class="section-label">Contact Information</div>
+        <h2>We're real people who actually pick up the phone.</h2>
+
+        <div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;margin-bottom:40px;">
+
+          <a href="tel:5128176906" style="display:flex;gap:16px;align-items:center;text-decoration:none;" class="card" style="padding:20px;">
+            <div style="width:52px;height:52px;background:var(--medicare-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">📞</div>
+            <div>
+              <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--color-ink-light);margin-bottom:4px;">Phone (click to call)</div>
+              <div style="font-size:1.4rem;font-family:var(--font-display);color:var(--color-ink);">512-817-6906</div>
+            </div>
+          </a>
+
+          <a href="mailto:Emily@HansonFirst.com" style="display:flex;gap:16px;align-items:center;text-decoration:none;" class="card">
+            <div style="width:52px;height:52px;background:var(--health-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">✉️</div>
+            <div>
+              <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--color-ink-light);margin-bottom:4px;">Email</div>
+              <div style="font-size:1.1rem;font-weight:600;color:var(--color-ink);">Emily@HansonFirst.com</div>
+            </div>
+          </a>
+
+          <div style="display:flex;gap:16px;align-items:center;" class="card">
+            <div style="width:52px;height:52px;background:var(--life-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">📍</div>
+            <div>
+              <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--color-ink-light);margin-bottom:4px;">Location</div>
+              <div style="font-weight:600;color:var(--color-ink);">Liberty Hill, TX</div>
+              <div style="font-size:.85rem;color:var(--color-ink-mid);">Serving clients in 26 states</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-bottom:32px;">
+          <h4>Office Hours</h4>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem;">
+            <div style="display:flex;justify-content:space-between;max-width:280px;">
+              <span style="color:var(--color-ink-mid);">Monday – Friday</span>
+              <span style="font-weight:600;">9:00 AM – 5:30 PM CT</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;max-width:280px;">
+              <span style="color:var(--color-ink-mid);">Saturday</span>
+              <span style="font-weight:600;">By appointment</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;max-width:280px;">
+              <span style="color:var(--color-ink-mid);">Sunday</span>
+              <span style="font-weight:600;">Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4>Follow us</h4>
+          <div class="footer-social" style="margin-top:12px;">
+            <a href="#" class="social-icon" style="background:var(--color-rule);color:var(--color-ink);" aria-label="Facebook">f</a>
+            <a href="#" class="social-icon" style="background:var(--color-rule);color:var(--color-ink);" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-icon" style="background:var(--color-rule);color:var(--color-ink);" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom:24px;">Send us a message</h3>
+          <form onsubmit="this.innerHTML='<div style=\'text-align:center;padding:48px 0;\'><div style=\'font-size:3rem;\'>✅</div><h3 style=\'margin-top:16px;\'>Message sent!</h3><p style=\'margin-top:12px;\'>We\'ll be in touch within 1 business day.</p></div>';return false;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="c-fname">First Name *</label>
+                <input class="form-input" type="text" id="c-fname" required placeholder="Jane" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="c-lname">Last Name *</label>
+                <input class="form-input" type="text" id="c-lname" required placeholder="Smith" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-email">Email Address *</label>
+              <input class="form-input" type="email" id="c-email" required placeholder="jane@example.com" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-phone">Phone</label>
+              <input class="form-input" type="tel" id="c-phone" placeholder="(512) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-topic">What can we help you with?</label>
+              <select class="form-select" id="c-topic">
+                <option value="">Select a topic…</option>
+                <option>Medicare — turning 65 or plan review</option>
+                <option>Health insurance — individual or family</option>
+                <option>Life insurance</option>
+                <option>General question</option>
+                <option>Event or speaking request</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-message">Your Message *</label>
+              <textarea class="form-textarea" id="c-message" required placeholder="Tell us what's on your mind…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-lg" style="width:100%;">Send Message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div style="margin-top:80px;">
+      <div class="section-header text-center">
+        <div class="section-label">Find Us</div>
+        <h2>Liberty Hill, TX</h2>
+        <p>Heart of the Texas Hill Country. We serve clients locally and across 26 states.</p>
+      </div>
+      <div class="map-wrap" style="margin-top:32px;border-radius:16px;overflow:hidden;border:1px solid var(--color-rule);">
+        <!-- Google Maps embed — replace src with Emily's actual address embed -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55184.43!2d-97.9119!3d30.6641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x865b37e45e1ef02f%3A0x3d5f2b10b83d7e5a!2sLiberty+Hill%2C+TX!5e0!3m2!1sen!2sus!4v1710000000000"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hanson Insurance — Liberty Hill, TX">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-block">
+      <div class="cta-block-content">
+        <h2>Ready to find the right coverage?</h2>
+        <p>No pressure. No fees. Just honest guidance from a real agent.</p>
+        <div class="cta-block-btns">
+          <a href="book.html"      class="btn btn-white btn-lg">📅 Book Appointment</a>
+          <a href="tel:5128176906" class="btn btn-white-outline btn-lg">📞 Call 512-817-6906</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<div class="mobile-sticky-cta" id="mobile-sticky"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>
