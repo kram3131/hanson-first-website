@@ -1,0 +1,14 @@
+.vercel
+.DS_Store
+
+# Off-topic working files (not part of the site)
+*.skill
+ted-framework/
+ted-framework-workspace/
+apple-siri-ai-platform-post.md
+claude-microsoft-365-post.md
+claude-m365-social.*
+ai-failure-rate-social.*
+imessage-channels-post.md
+jake-van-clief-ai-class.md
+medspa-content-post-humanized.md
