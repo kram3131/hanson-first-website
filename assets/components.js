@@ -70,7 +70,7 @@ function renderFooter() {
           <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in 37 states from Liberty Hill, TX.</p>
           <div class="footer-contact">
             <a href="tel:5128176906">📞 512-817-6906</a>
-            <a href="mailto:Emily@HansonFirst.com">✉️ Emily@HansonFirst.com</a>
+            <a class="js-email" data-user="Emily" data-domain="HansonFirst.com" href="#">✉️ <span class="js-email-text">Emily [at] HansonFirst.com</span></a>
             <a href="${root}book.html">📅 Book an Appointment</a>
           </div>
           <div class="footer-social">
@@ -254,11 +254,26 @@ function initCoverageCalc() {
   });
 }
 
+/* ── Email reveal (anti-harvest) ─────────────────────────── */
+/* Email addresses are kept out of the page source — split across */
+/* data-* attributes with no "@" and no mailto: link. This        */
+/* assembles a working link for real visitors at load time, so    */
+/* scraper bots reading the raw HTML never see a usable address.   */
+function revealEmails() {
+  document.querySelectorAll('.js-email').forEach(function (el) {
+    var addr = el.dataset.user + '@' + el.dataset.domain;
+    el.setAttribute('href', 'mailto:' + addr);
+    var label = el.querySelector('.js-email-text');
+    if (label) label.textContent = addr;
+  });
+}
+
 /* ── Init all ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
   renderMobileSticky();
+  revealEmails();
   initAccordions();
   initTestimonialFilter();
   initSubsidyCalc();
