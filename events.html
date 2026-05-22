@@ -25,88 +25,8 @@
       <h2>Join us this season</h2>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:16px;">
-
-      <div class="event-card">
-        <div class="event-date-col">
-          <div class="event-month">APR</div>
-          <div class="event-day">8</div>
-        </div>
-        <div class="event-body">
-          <div class="event-type">Medicare 101 · In Person</div>
-          <h4 style="color:var(--medicare-dark);">Medicare 101 Workshop — Liberty Hill</h4>
-          <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Are you turning 65 this year? Join Emily for a free workshop on how Medicare works, your coverage options, and how to enroll without a penalty. Light refreshments provided.</p>
-          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <span style="font-size:.8rem;color:var(--color-ink-light);">📍 Liberty Hill Community Center · 10:00 AM – 12:00 PM</span>
-            <a href="book.html" class="btn btn-medicare btn-sm">Register →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-col" style="background:var(--health-light);color:var(--health-dark);">
-          <div class="event-month">APR</div>
-          <div class="event-day">22</div>
-        </div>
-        <div class="event-body">
-          <div class="event-type">Health Insurance · Webinar</div>
-          <h4 style="color:var(--health-dark);">ACA Open Enrollment — What You Need to Know</h4>
-          <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Online webinar covering 2026 ACA plan changes, how to use the subsidy calculator, and how to pick the right metal tier for your family. Q&amp;A included.</p>
-          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <span style="font-size:.8rem;color:var(--color-ink-light);">💻 Zoom Webinar · 6:00 PM – 7:00 PM CT</span>
-            <a href="book.html" class="btn btn-health btn-sm">Register →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-col" style="background:var(--medicare-light);color:var(--medicare-dark);">
-          <div class="event-month">MAY</div>
-          <div class="event-day">3</div>
-        </div>
-        <div class="event-body">
-          <div class="event-type">Community Fair · In Person</div>
-          <h4 style="color:var(--medicare-dark);">Spring Senior Health Fair — Georgetown</h4>
-          <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Hanson Insurance will have a booth at the Georgetown Senior Health Fair. Stop by to ask questions, pick up Medicare guides, and schedule a one-on-one consultation with Emily or a team member.</p>
-          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <span style="font-size:.8rem;color:var(--color-ink-light);">📍 Georgetown Recreation Center · 9:00 AM – 2:00 PM</span>
-            <a href="contact.html" class="btn btn-medicare btn-sm">More Info →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-col" style="background:var(--life-light);color:var(--life-dark);">
-          <div class="event-month">MAY</div>
-          <div class="event-day">15</div>
-        </div>
-        <div class="event-body">
-          <div class="event-type">Life Insurance · Webinar</div>
-          <h4 style="color:var(--life-dark);">Life Insurance 101 — Protecting Your Family</h4>
-          <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Learn the difference between term, whole, and final expense life insurance. Find out how much coverage you actually need — and how to get it at a price that fits your budget.</p>
-          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <span style="font-size:.8rem;color:var(--color-ink-light);">💻 Zoom Webinar · 12:00 PM – 1:00 PM CT</span>
-            <a href="book.html" class="btn btn-life btn-sm">Register →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-col" style="background:var(--medicare-light);color:var(--medicare-dark);">
-          <div class="event-month">JUN</div>
-          <div class="event-day">10</div>
-        </div>
-        <div class="event-body">
-          <div class="event-type">Medicare Enrollment Help · In Person</div>
-          <h4 style="color:var(--medicare-dark);">Medicare Enrollment Help Session — Leander</h4>
-          <p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">Turning 65 this summer? Bring your Medicare card (or your questions about getting one) and Emily will walk you through your enrollment options in a small group setting.</p>
-          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-            <span style="font-size:.8rem;color:var(--color-ink-light);">📍 Leander Public Library · 1:00 PM – 3:00 PM</span>
-            <a href="book.html" class="btn btn-medicare btn-sm">Register →</a>
-          </div>
-        </div>
-      </div>
-
+    <div id="events-list" style="display:flex;flex-direction:column;gap:16px;">
+      <!-- Events render automatically from assets/events.js — do not edit here -->
     </div>
   </div>
 </section>
@@ -170,5 +90,6 @@
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
+<script src="assets/events.js"></script>
 </body>
 </html>
