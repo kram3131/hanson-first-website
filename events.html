@@ -32,42 +32,15 @@
 </section>
 
 <!-- Webinar Replays -->
-<section class="section" style="background:var(--color-card);">
+<section id="webinars-section" class="section" style="background:var(--color-card);display:none;">
   <div class="container">
     <div class="section-header">
       <div class="section-label">On Demand</div>
       <h2>Webinar replays</h2>
       <p>Missed a session? Watch the recordings below.</p>
     </div>
-    <div class="grid-3" style="margin-top:40px;">
-
-      <div class="card">
-        <div style="background:var(--medicare-light);border-radius:8px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:16px;">▶️</div>
-        <div class="badge badge-medicare" style="margin-bottom:8px;">Medicare</div>
-        <h4>Understanding Medicare Advantage vs. Supplement</h4>
-        <p style="margin-top:8px;font-size:.85rem;color:var(--color-ink-mid);">Emily breaks down the two main ways to fill Medicare's gaps and explains who each approach is best for.</p>
-        <p style="margin-top:8px;font-size:.8rem;color:var(--color-ink-light);">Recorded March 2026 · 52 min</p>
-        <a href="#" class="btn btn-medicare-outline btn-sm" style="margin-top:12px;">Watch Replay →</a>
-      </div>
-
-      <div class="card">
-        <div style="background:var(--health-light);border-radius:8px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:16px;">▶️</div>
-        <div class="badge badge-health" style="margin-bottom:8px;">Health</div>
-        <h4>ACA Subsidies: Are You Leaving Money on the Table?</h4>
-        <p style="margin-top:8px;font-size:.85rem;color:var(--color-ink-mid);">Katie walks through how premium tax credits work and the income ranges where subsidies make the biggest impact.</p>
-        <p style="margin-top:8px;font-size:.8rem;color:var(--color-ink-light);">Recorded February 2026 · 45 min</p>
-        <a href="#" class="btn btn-health-outline btn-sm" style="margin-top:12px;">Watch Replay →</a>
-      </div>
-
-      <div class="card">
-        <div style="background:var(--medicare-light);border-radius:8px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:16px;">▶️</div>
-        <div class="badge badge-medicare" style="margin-bottom:8px;">Medicare</div>
-        <h4>2026 Medicare Updates — What's Changed This Year</h4>
-        <p style="margin-top:8px;font-size:.85rem;color:var(--color-ink-mid);">Emily covers the new $2,100 Part D cap, Part B premium changes, and the Inflation Reduction Act's ongoing impact.</p>
-        <p style="margin-top:8px;font-size:.8rem;color:var(--color-ink-light);">Recorded January 2026 · 38 min</p>
-        <a href="#" class="btn btn-medicare-outline btn-sm" style="margin-top:12px;">Watch Replay →</a>
-      </div>
-
+    <div id="webinars-list" class="grid-3" style="margin-top:40px;">
+      <!-- Webinar replays render automatically from assets/webinars.js -->
     </div>
   </div>
 </section>
@@ -91,5 +64,6 @@
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
 <script src="assets/events.js"></script>
+<script src="assets/webinars.js"></script>
 </body>
 </html>

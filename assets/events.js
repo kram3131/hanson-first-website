@@ -7,6 +7,7 @@
 
    ── THE EVENTS SHEET ────────────────────────────────────────
    https://docs.google.com/spreadsheets/d/1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI/edit
+   Use the tab named "Events".
 
    • Add an event    → add a new row
    • Change an event → edit the row
@@ -26,6 +27,7 @@
    ============================================================ */
 
 var SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI";
+var EVENTS_TAB = "Events";
 
 
 /* ============================================================
@@ -113,7 +115,8 @@ var SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI";
 
     // Cache-buster keeps the page in sync with recent sheet edits.
     var url = "https://docs.google.com/spreadsheets/d/" + SHEET_ID +
-              "/gviz/tq?tqx=out:json&headers=1&_=" + Date.now();
+              "/gviz/tq?tqx=out:json&headers=1&sheet=" +
+              encodeURIComponent(EVENTS_TAB) + "&_=" + Date.now();
 
     fetch(url)
       .then(function (r) { return r.text(); })
