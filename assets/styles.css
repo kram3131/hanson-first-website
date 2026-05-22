@@ -162,7 +162,7 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 }
 
 .header-logo { flex-shrink: 0; }
-.header-logo img { height: 48px; width: auto; }
+.header-logo img { height: 64px; width: auto; }
 
 .header-nav {
   display: flex;
@@ -362,6 +362,16 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 .card-medicare { border-top: 4px solid var(--medicare-primary); }
 .card-health   { border-top: 4px solid var(--health-primary); }
 .card-life     { border-top: 4px solid var(--life-primary); }
+
+/* Club cards — flex column so the CTA button bottom-aligns across the row */
+.club-card { display: flex; flex-direction: column; }
+
+/* Topic selector cards (book.html) — single-select toggle */
+.topic-card { cursor: pointer; border: 2px solid var(--color-rule); }
+.topic-card.selected[data-accent="medicare"] { border-color: var(--medicare-primary); background: var(--medicare-light); }
+.topic-card.selected[data-accent="health"]   { border-color: var(--health-primary);   background: var(--health-light); }
+.topic-card.selected[data-accent="life"]     { border-color: var(--life-primary);     background: var(--life-light); }
+.topic-card.selected[data-accent="general"]  { border-color: var(--color-ink); }
 
 /* Club icon badge */
 .club-icon {

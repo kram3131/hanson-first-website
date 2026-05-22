@@ -27,7 +27,7 @@ function renderHeader() {
           <a href="${root}events.html">Events</a>
         </nav>
         <div class="header-right">
-          <span class="no-fee-badge">No broker fees. Ever.</span>
+          <span class="no-fee-badge">No broker fees.</span>
           <a href="tel:5128176906" class="header-phone">📞 512-817-6906</a>
           <a href="${root}book.html" class="btn btn-dark btn-sm">Book Appointment</a>
           <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
@@ -67,7 +67,7 @@ function renderFooter() {
           <div class="footer-logo">
             <img src="${root}logos/NewHansonLogo.png" alt="Hanson Insurance Agency" />
           </div>
-          <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in 26 states from Liberty Hill, TX.</p>
+          <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in 37 states from Liberty Hill, TX.</p>
           <div class="footer-contact">
             <a href="tel:5128176906">📞 512-817-6906</a>
             <a href="mailto:Emily@HansonFirst.com">✉️ Emily@HansonFirst.com</a>
@@ -98,7 +98,7 @@ function renderFooter() {
             <a href="${root}club-health/index.html">Health Overview</a>
             <a href="${root}club-health/aca-marketplace.html">ACA Marketplace</a>
             <a href="${root}club-health/individual-family.html">Individual &amp; Family</a>
-            <a href="${root}club-health/quote.html">Get a Quote</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfj7fO_VLcRAWZxU6d4j6IJJOUkSe1p7HojB9edztHuZ2Yg_A/viewform" target="_blank">Get a Quote</a>
           </div>
           <div class="footer-col-title" style="margin-top:24px;">Club Life</div>
           <div class="footer-links">
@@ -127,8 +127,8 @@ function renderFooter() {
         </div>
         <div class="footer-badges">
           <span class="footer-badge">HIPAA Compliant</span>
-          <span class="footer-badge">Licensed in 26 States</span>
-          <span class="footer-badge">No Broker Fees. Ever.</span>
+          <span class="footer-badge">Licensed in 37 States</span>
+          <span class="footer-badge">No Broker Fees.</span>
         </div>
       </div>
       <div class="footer-disclaimer">

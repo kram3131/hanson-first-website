@@ -30,7 +30,7 @@
 
         <!-- Topic selector -->
         <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px;">
-          <div class="card" style="cursor:pointer;border:2px solid var(--medicare-primary);background:var(--medicare-light);" onclick="this.style.borderWidth='3px'">
+          <div class="card topic-card selected" data-accent="medicare" onclick="toggleTopic(this)">
             <div style="display:flex;gap:12px;align-items:center;">
               <div><img src="logos/clubmedicare.png" alt="Club Medicare" style="height:36px;width:36px;border-radius:50%;"></div>
               <div>
@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--health-primary)';this.style.borderWidth='2px'">
+          <div class="card topic-card" data-accent="health" onclick="toggleTopic(this)">
             <div style="display:flex;gap:12px;align-items:center;">
               <div><img src="logos/Logo Club HEALTH.png" alt="Club Health" style="height:36px;width:36px;border-radius:50%;"></div>
               <div>
@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--life-primary)';this.style.borderWidth='2px'">
+          <div class="card topic-card" data-accent="life" onclick="toggleTopic(this)">
             <div style="display:flex;gap:12px;align-items:center;">
               <div><img src="logos/clublife.png" alt="Club Life" style="height:36px;width:36px;border-radius:50%;"></div>
               <div>
@@ -57,7 +57,7 @@
               </div>
             </div>
           </div>
-          <div class="card" style="cursor:pointer;" onclick="this.style.borderColor='var(--color-ink)';this.style.borderWidth='2px'">
+          <div class="card topic-card" data-accent="general" onclick="toggleTopic(this)">
             <div style="display:flex;gap:12px;align-items:center;">
               <div style="font-size:1.5rem;">💬</div>
               <div>
@@ -103,7 +103,7 @@
           <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem;">
             <div style="display:flex;justify-content:space-between;">
               <span style="color:var(--color-ink-mid);">Monday – Friday</span>
-              <span style="font-weight:600;">9:00 AM – 5:30 PM CT</span>
+              <span style="font-weight:600;">9:00 AM – 5:00 PM CT</span>
             </div>
             <div style="display:flex;justify-content:space-between;">
               <span style="color:var(--color-ink-mid);">Saturday</span>
@@ -131,5 +131,14 @@
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
+<script>
+  function toggleTopic(card) {
+    var wasSelected = card.classList.contains('selected');
+    document.querySelectorAll('.topic-card').forEach(function (c) {
+      c.classList.remove('selected');
+    });
+    if (!wasSelected) card.classList.add('selected');
+  }
+</script>
 </body>
 </html>
