@@ -26,6 +26,7 @@ function renderHeader() {
           <a href="${root}club-life/index.html"     class="nav-pill-life">Club Life</a>
           <a href="${root}testimonials.html">Testimonials</a>
           <a href="${root}events.html">Events</a>
+          <a href="${root}join-us.html">Join Us</a>
         </nav>
         <div class="header-right">
           <span class="no-fee-badge">No broker fees.</span>
@@ -46,6 +47,7 @@ function renderHeader() {
       <a href="${root}club-life/index.html"     style="color:var(--life-dark);font-weight:600;"><img src="${root}logos/clublife.png" alt="" style="height:20px;width:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">Club Life</a>
       <a href="${root}testimonials.html">Testimonials</a>
       <a href="${root}events.html">Events</a>
+      <a href="${root}join-us.html">Join Us</a>
       <a href="${root}forms.html">Forms</a>
       <a href="${root}contact.html">Contact</a>
       <a href="${root}book.html" class="btn btn-dark" style="margin-top:8px;">Book Appointment</a>
@@ -118,6 +120,7 @@ function renderFooter() {
             <a href="${root}team.html">Meet the Team</a>
             <a href="${root}testimonials.html">Testimonials</a>
             <a href="${root}events.html">Events &amp; Webinars</a>
+            <a href="${root}join-us.html">Join the Team</a>
             <a href="${root}forms.html">Forms Hub</a>
             <a href="${root}contact.html">Contact</a>
             <a href="${root}book.html">Book Appointment</a>
