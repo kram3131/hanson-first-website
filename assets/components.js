@@ -20,6 +20,7 @@ function renderHeader() {
         <nav class="header-nav" aria-label="Main navigation">
           <a href="${root}index.html">Home</a>
           <a href="${root}about.html">About</a>
+          <a href="${root}team.html">Team</a>
           <a href="${root}club-medicare/index.html" class="nav-pill-medicare">Club Medicare</a>
           <a href="${root}club-health/index.html"   class="nav-pill-health">Club Health</a>
           <a href="${root}club-life/index.html"     class="nav-pill-life">Club Life</a>
@@ -39,6 +40,7 @@ function renderHeader() {
     <nav class="mobile-nav" id="mobile-nav">
       <a href="${root}index.html">Home</a>
       <a href="${root}about.html">About</a>
+      <a href="${root}team.html">Team</a>
       <a href="${root}club-medicare/index.html" style="color:var(--medicare-dark);font-weight:600;"><img src="${root}logos/clubmedicare.png" alt="" style="height:20px;width:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">Club Medicare</a>
       <a href="${root}club-health/index.html"   style="color:var(--health-dark);font-weight:600;"><img src="${root}logos/Logo Club HEALTH.png" alt="" style="height:20px;width:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">Club Health</a>
       <a href="${root}club-life/index.html"     style="color:var(--life-dark);font-weight:600;"><img src="${root}logos/clublife.png" alt="" style="height:20px;width:20px;border-radius:50%;vertical-align:middle;margin-right:6px;">Club Life</a>
@@ -113,6 +115,7 @@ function renderFooter() {
           <div class="footer-col-title">Company</div>
           <div class="footer-links">
             <a href="${root}about.html">About Emily</a>
+            <a href="${root}team.html">Meet the Team</a>
             <a href="${root}testimonials.html">Testimonials</a>
             <a href="${root}events.html">Events &amp; Webinars</a>
             <a href="${root}forms.html">Forms Hub</a>
