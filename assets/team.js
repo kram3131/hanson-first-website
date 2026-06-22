@@ -82,7 +82,7 @@ var TEAM_TAB = "Team";
 
     return '' +
       '<div class="agent-card" data-clubs="' + agent.clubs.join(' ') + '">' +
-        '<div class="agent-photo" style="position:relative;background:linear-gradient(135deg,var(--medicare-primary),var(--health-primary));display:flex;align-items:center;justify-content:center;color:white;font-size:2.4rem;font-weight:700;aspect-ratio:1/1;overflow:hidden;">' +
+        '<div class="agent-photo" style="position:relative;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-ink-mid,#666);font-size:2.4rem;font-weight:700;aspect-ratio:1/1;overflow:hidden;">' +
           esc(agent.initials) +
           photoOverlay +
         '</div>' +
