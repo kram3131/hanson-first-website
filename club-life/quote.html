@@ -31,7 +31,7 @@
             <strong>HIPAA Notice:</strong> The information you provide is protected under HIPAA. We use it solely to provide insurance guidance and will never share it without your consent.
           </div>
         </div>
-        <form onsubmit="this.innerHTML='<div style=\'text-align:center;padding:48px 0;\'><div style=\'font-size:3rem;\'>✅</div><h3 style=\'margin-top:16px;\'>Thank you!</h3><p style=\'margin-top:12px;\'>Emily will be in touch soon. For faster service, call <a href=\'tel:5128176906\' style=\'color:var(--life-primary);font-weight:600;\'>512-817-6906</a>.</p></div>';return false;">
+        <form id="lifequote-form">
           <div class="form-grid-2">
             <div class="form-group">
               <label class="form-label" for="lq-fname">First Name *</label>
@@ -54,7 +54,7 @@
           </div>
           <div class="form-group">
             <label class="checkbox-group">
-              <input type="checkbox" />
+              <input type="checkbox" id="lq-sms-consent" />
               <span>By checking this box, I agree to receive customer care and account notification text messages from Hanson Insurance Agency at the mobile number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text STOP to unsubscribe at any time. Text HELP for help. See our <a href="../privacy-policy.html" style="color:var(--life-primary);">Privacy Policy</a> and <a href="../sms-terms.html" style="color:var(--life-primary);">Terms of Service</a>.</span>
             </label>
           </div>
@@ -107,7 +107,7 @@
           </div>
           <div class="form-group">
             <label class="checkbox-group">
-              <input type="checkbox" required />
+              <input type="checkbox" id="lq-contact-consent" required />
               <span>I consent to being contacted by Hanson Insurance Agency regarding my life insurance inquiry.</span>
             </label>
           </div>
@@ -148,5 +148,28 @@
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="../assets/components.js"></script>
+<script src="../assets/form-submit.js"></script>
+<script>
+  document.getElementById('lifequote-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var data = {
+      firstName: document.getElementById('lq-fname').value,
+      lastName: document.getElementById('lq-lname').value,
+      dob: document.getElementById('lq-dob').value,
+      phone: document.getElementById('lq-phone').value,
+      smsConsent: document.getElementById('lq-sms-consent').checked,
+      healthStatus: document.getElementById('lq-health').value,
+      coverageAmount: document.getElementById('lq-amount').value,
+      coverageType: document.getElementById('lq-type').value,
+      bestCallTime: document.getElementById('lq-calltime').value,
+      notes: document.getElementById('lq-notes').value,
+      contactConsent: document.getElementById('lq-contact-consent').checked
+    };
+    submitToSheet('lifequote', data).catch(function () {}).then(function () {
+      form.innerHTML = '<div style="text-align:center;padding:48px 0;"><div style="font-size:3rem;">✅</div><h3 style="margin-top:16px;">Thank you!</h3><p style="margin-top:12px;">Emily will be in touch soon. For faster service, call <a href="tel:5128176906" style="color:var(--life-primary);font-weight:600;">512-817-6906</a>.</p></div>';
+    });
+  });
+</script>
 </body>
 </html>

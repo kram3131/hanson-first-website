@@ -88,7 +88,7 @@
       <div>
         <div class="card">
           <h3 style="margin-bottom:24px;">Send us a message</h3>
-          <form onsubmit="this.innerHTML='<div style=\'text-align:center;padding:48px 0;\'><div style=\'font-size:3rem;\'>✅</div><h3 style=\'margin-top:16px;\'>Message sent!</h3><p style=\'margin-top:12px;\'>Emily will be in touch soon.</p></div>';return false;">
+          <form id="contact-form">
             <div class="form-grid-2">
               <div class="form-group">
                 <label class="form-label" for="c-fname">First Name *</label>
@@ -109,7 +109,7 @@
             </div>
             <div class="form-group">
               <label class="checkbox-group">
-                <input type="checkbox" />
+                <input type="checkbox" id="c-sms-consent" />
                 <span>By checking this box, I agree to receive customer care and account notification text messages from Hanson Insurance Agency at the mobile number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text STOP to unsubscribe at any time. Text HELP for help. See our <a href="privacy-policy.html" style="color:var(--medicare-primary);">Privacy Policy</a> and <a href="sms-terms.html" style="color:var(--medicare-primary);">Terms of Service</a>.</span>
               </label>
             </div>
@@ -170,5 +170,24 @@
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
+<script src="assets/form-submit.js"></script>
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var data = {
+      firstName: document.getElementById('c-fname').value,
+      lastName: document.getElementById('c-lname').value,
+      email: document.getElementById('c-email').value,
+      phone: document.getElementById('c-phone').value,
+      smsConsent: document.getElementById('c-sms-consent').checked,
+      topic: document.getElementById('c-topic').value,
+      message: document.getElementById('c-message').value
+    };
+    submitToSheet('contact', data).catch(function () {}).then(function () {
+      form.innerHTML = '<div style="text-align:center;padding:48px 0;"><div style="font-size:3rem;">✅</div><h3 style="margin-top:16px;">Message sent!</h3><p style="margin-top:12px;">Emily will be in touch soon.</p></div>';
+    });
+  });
+</script>
 </body>
 </html>

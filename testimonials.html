@@ -41,7 +41,7 @@
         <h2>Had a great experience?</h2>
         <p>We'd love to hear from you. Submit your testimonial below.</p>
       </div>
-      <form class="card" style="margin-top:32px;" onsubmit="this.innerHTML='<div style=\'text-align:center;padding:32px;\'>✅ <strong>Thank you!</strong> Your testimonial has been submitted.</div>';return false;">
+      <form id="testimonial-form" class="card" style="margin-top:32px;">
         <div class="form-group">
           <label class="form-label" for="t-name">Your Name</label>
           <input class="form-input" type="text" id="t-name" placeholder="Jane Smith" />
@@ -88,5 +88,21 @@
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
 <script src="assets/testimonials.js"></script>
+<script src="assets/form-submit.js"></script>
+<script>
+  document.getElementById('testimonial-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var data = {
+      name: document.getElementById('t-name').value,
+      location: document.getElementById('t-location').value,
+      club: document.getElementById('t-club').value,
+      review: document.getElementById('t-review').value
+    };
+    submitToSheet('testimonial', data).catch(function () {}).then(function () {
+      form.innerHTML = '<div style="text-align:center;padding:32px;">✅ <strong>Thank you!</strong> Your testimonial has been submitted.</div>';
+    });
+  });
+</script>
 </body>
 </html>

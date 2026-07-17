@@ -252,7 +252,7 @@
         <h3 style="font-size:1.5rem;">Medicare &amp; health insurance updates, quarterly.</h3>
         <p style="margin-top:8px;font-size:.9rem;">No spam. Just useful updates on enrollment periods, plan changes, and policy news — straight from Emily.</p>
       </div>
-      <form class="newsletter-form" onsubmit="this.innerHTML='<p style=\'padding:12px;color:var(--medicare-dark);font-weight:600;\'>✅ You\'re signed up! Check your inbox.</p>';return false;">
+      <form id="newsletter-form-home" class="newsletter-form">
         <input type="email" placeholder="your@email.com" required />
         <button type="submit" class="btn btn-medicare">Subscribe</button>
       </form>
@@ -283,5 +283,16 @@
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 
 <script src="assets/components.js"></script>
+<script src="assets/form-submit.js"></script>
+<script>
+  document.getElementById('newsletter-form-home').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.querySelector('input[type=email]').value;
+    submitToSheet('newsletter', { email: email }).catch(function () {}).then(function () {
+      form.innerHTML = '<p style="padding:12px;color:var(--medicare-dark);font-weight:600;">✅ You\'re signed up! Check your inbox.</p>';
+    });
+  });
+</script>
 </body>
 </html>

@@ -157,7 +157,7 @@
         <h2>Ready to explore it?</h2>
         <p>No commitment. Just a conversation. Tell us a little about yourself and Emily will be in touch.</p>
       </div>
-      <form class="card" style="margin-top:32px;" onsubmit="this.innerHTML='<div style=\'text-align:center;padding:48px 0;\'><div style=\'font-size:3rem;\'>✅</div><h3 style=\'margin-top:16px;\'>Got it — thanks!</h3><p style=\'margin-top:12px;\'>Emily will reach out soon. In the meantime, feel free to call or text at <a href=\'tel:5128176906\' style=\'color:var(--medicare-primary);font-weight:600;\'>512-817-6906</a>.</p></div>';return false;">
+      <form id="joinus-form" class="card" style="margin-top:32px;">
         <div class="form-grid-2">
           <div class="form-group">
             <label class="form-label" for="j-fname">First Name *</label>
@@ -178,7 +178,7 @@
         </div>
         <div class="form-group">
           <label class="checkbox-group">
-            <input type="checkbox" />
+            <input type="checkbox" id="j-sms-consent" />
             <span>By checking this box, I agree to receive customer care and account notification text messages from Hanson Insurance Agency at the mobile number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text STOP to unsubscribe at any time. Text HELP for help. See our <a href="privacy-policy.html" style="color:var(--medicare-primary);">Privacy Policy</a> and <a href="sms-terms.html" style="color:var(--medicare-primary);">Terms of Service</a>.</span>
           </label>
         </div>
@@ -245,5 +245,26 @@
 <footer class="site-footer" id="site-footer"></footer>
 <div class="mobile-sticky-cta" id="mobile-sticky"></div>
 <script src="assets/components.js"></script>
+<script src="assets/form-submit.js"></script>
+<script>
+  document.getElementById('joinus-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var data = {
+      firstName: document.getElementById('j-fname').value,
+      lastName: document.getElementById('j-lname').value,
+      email: document.getElementById('j-email').value,
+      phone: document.getElementById('j-phone').value,
+      smsConsent: document.getElementById('j-sms-consent').checked,
+      licensed: document.getElementById('j-licensed').value,
+      experience: document.getElementById('j-experience').value,
+      interest: document.getElementById('j-interest').value,
+      notes: document.getElementById('j-note').value
+    };
+    submitToSheet('joinus', data).catch(function () {}).then(function () {
+      form.innerHTML = '<div style="text-align:center;padding:48px 0;"><div style="font-size:3rem;">✅</div><h3 style="margin-top:16px;">Got it — thanks!</h3><p style="margin-top:12px;">Emily will reach out soon. In the meantime, feel free to call or text at <a href="tel:5128176906" style="color:var(--medicare-primary);font-weight:600;">512-817-6906</a>.</p></div>';
+    });
+  });
+</script>
 </body>
 </html>
