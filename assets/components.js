@@ -31,6 +31,7 @@ function renderHeader() {
         <div class="header-right">
           <span class="no-fee-badge">No broker fees.</span>
           <a href="tel:5128176906" class="header-phone">📞 512-817-6906</a>
+          <a href="${root}contact.html" class="btn btn-outline btn-sm">Contact Us</a>
           <a href="${root}book.html" class="btn btn-dark btn-sm">Book Appointment</a>
           <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
             <span></span><span></span><span></span>
@@ -75,6 +76,7 @@ function renderFooter() {
           <div class="footer-contact">
             <a href="tel:5128176906">📞 512-817-6906</a>
             <a class="js-email" data-user="Emily" data-domain="HansonFirst.com" href="#">✉️ <span class="js-email-text">Emily [at] HansonFirst.com</span></a>
+            <a href="https://maps.google.com/?q=13985+TX-29,+Liberty+Hill,+TX+78642" target="_blank" rel="noopener">📍 13985 TX-29, Liberty Hill, TX 78642</a>
             <a href="${root}book.html">📅 Book an Appointment</a>
           </div>
           <div class="footer-social">
