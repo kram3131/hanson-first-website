@@ -372,6 +372,11 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 .topic-card.selected[data-accent="health"]   { border-color: var(--health-primary);   background: var(--health-light); }
 .topic-card.selected[data-accent="life"]     { border-color: var(--life-primary);     background: var(--life-light); }
 .topic-card.selected[data-accent="general"]  { border-color: var(--color-ink); }
+.topic-card[href] { display: block; text-decoration: none; }
+
+/* Medicare New/Existing Client sub-choice row (book.html) */
+.topic-subrow { display: flex; gap: 12px; margin: 8px 0 0 20px; padding-left: 16px; border-left: 2px solid var(--medicare-primary); }
+.topic-subcard { flex: 1; padding: var(--sp-4); text-align: center; }
 
 /* Club icon badge */
 .club-icon {
