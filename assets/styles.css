@@ -712,36 +712,6 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
   cursor: pointer;
 }
 
-/* ── Interactive Tools ────────────────────────────────────── */
-.tool-card {
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-rule);
-  padding: var(--sp-8);
-  box-shadow: var(--shadow-md);
-}
-.tool-result {
-  background: var(--color-bg);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--color-rule);
-  padding: var(--sp-6);
-  margin-top: var(--sp-6);
-  display: none;
-}
-.tool-result.visible { display: block; }
-.tool-result-main {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--color-ink);
-}
-.tool-result-label { font-size: 0.875rem; color: var(--color-ink-light); margin-bottom: var(--sp-2); }
-.tool-disclaimer {
-  font-size: 0.75rem;
-  color: var(--color-ink-light);
-  margin-top: var(--sp-4);
-  font-style: italic;
-}
-
 /* Range input */
 input[type="range"] {
   width: 100%;

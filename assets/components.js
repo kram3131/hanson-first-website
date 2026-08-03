@@ -188,80 +188,6 @@ function initTestimonialFilter() {
   });
 }
 
-/* ── Subsidy Calculator (Club Health) ───────────────────── */
-function initSubsidyCalc() {
-  const form = document.getElementById('subsidy-calc');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const income  = parseFloat(document.getElementById('calc-income').value) || 0;
-    const hh      = parseInt(document.getElementById('calc-household').value)  || 1;
-    const result  = document.getElementById('subsidy-result');
-
-    // 2026 FPL approximate thresholds (simplified illustrative calc)
-    const fpl2026 = [0, 15060, 20440, 25820, 31200, 36580, 41960, 47340, 52720];
-    const fplBase = fpl2026[Math.min(hh, 8)];
-    const pctFpl  = (income / fplBase) * 100;
-
-    let msg, monthly, eligible;
-    if (pctFpl < 138) {
-      monthly = 0; eligible = 'Medicaid';
-      msg = `Based on your income, you may qualify for <strong>Medicaid</strong> — which could provide free or very low-cost health coverage. Emily can help you understand your options.`;
-    } else if (pctFpl <= 400) {
-      const subsidy = Math.max(0, Math.round((income * 0.085 - income * 0.02) / 12 * -1 + 800));
-      monthly = Math.min(subsidy, 700);
-      eligible = 'ACA subsidy';
-      msg = `You may qualify for a <strong>Premium Tax Credit of approximately $${monthly}/month</strong>. This is an estimate only — actual amounts depend on the plans available in your area and other factors.`;
-    } else {
-      monthly = 0; eligible = 'No subsidy';
-      msg = `Based on your income, you may not qualify for an ACA subsidy, but you can still purchase Marketplace or individual plans. Emily can help find affordable options.`;
-    }
-
-    result.classList.add('visible');
-    result.innerHTML = `
-      <div class="tool-result-label">Estimated Monthly Subsidy</div>
-      <div class="tool-result-main">${monthly > 0 ? '$' + monthly + '/mo' : eligible}</div>
-      <p style="margin-top:12px;font-size:.95rem;color:var(--color-ink-mid);">${msg}</p>
-      <a href="${root}book.html" class="btn btn-health" style="margin-top:16px;">Book a Free Consultation →</a>
-      <div class="tool-disclaimer">This is an estimate for informational purposes only. Actual subsidy amounts depend on your state, plan selection, and household details. Contact Emily for an accurate quote.</div>
-    `;
-  });
-}
-
-/* ── Coverage Needs Calculator (Club Life) ──────────────── */
-function initCoverageCalc() {
-  const form = document.getElementById('coverage-calc');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const age      = parseInt(document.getElementById('calc-age').value)      || 35;
-    const income   = parseFloat(document.getElementById('calc-income-life').value) || 0;
-    const deps     = parseInt(document.getElementById('calc-deps').value)     || 0;
-    const debts    = parseFloat(document.getElementById('calc-debts').value)  || 0;
-    const result   = document.getElementById('coverage-result');
-
-    // Simple DIME-inspired estimate
-    const incomeMultiplier = age < 40 ? 12 : age < 55 ? 10 : 7;
-    const base    = income * incomeMultiplier;
-    const depAdj  = deps * 50000;
-    const low     = Math.round((base + depAdj + debts) / 50000) * 50000;
-    const high    = Math.round(low * 1.4 / 50000) * 50000;
-
-    result.classList.add('visible');
-    result.innerHTML = `
-      <div class="tool-result-label">Suggested Coverage Range</div>
-      <div class="tool-result-main">$${(low/1000).toFixed(0)}K – $${(high/1000).toFixed(0)}K</div>
-      <p style="margin-top:12px;font-size:.95rem;color:var(--color-ink-mid);">
-        Based on your age, income, ${deps} dependent${deps !== 1 ? 's' : ''}, and $${debts.toLocaleString()} in debts,
-        a coverage range of <strong>$${(low/1000).toFixed(0)}K–$${(high/1000).toFixed(0)}K</strong> is a common starting point.
-        Emily can help you find the right policy at a price that fits your budget.
-      </p>
-      <a href="${root}book.html" class="btn btn-life" style="margin-top:16px;">Talk to Emily for Free →</a>
-      <div class="tool-disclaimer">This estimate is for illustrative purposes only and should not be considered financial or insurance advice. Actual coverage needs vary based on individual circumstances.</div>
-    `;
-  });
-}
-
 /* ── Email reveal (anti-harvest) ─────────────────────────── */
 /* Email addresses are kept out of the page source — split across */
 /* data-* attributes with no "@" and no mailto: link. This        */
@@ -284,6 +210,4 @@ document.addEventListener('DOMContentLoaded', () => {
   revealEmails();
   initAccordions();
   initTestimonialFilter();
-  initSubsidyCalc();
-  initCoverageCalc();
 });
