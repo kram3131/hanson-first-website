@@ -154,11 +154,17 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
   padding: var(--sp-3) 0;
 }
 
+/* The header's nav has grown wider than the page's normal 1180px
+   content container can hold — give the header its own wider
+   container so it actually has room, instead of visually spilling
+   past its box (which is what caused items to run off-screen). */
+.site-header .container { max-width: 1500px; }
+
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--sp-6);
+  gap: var(--sp-4);
 }
 
 .header-logo { flex-shrink: 0; }
@@ -167,13 +173,13 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 .header-nav {
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: 2px;
 }
 .header-nav a {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--color-ink-mid);
-  padding: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-2);
   border-radius: var(--radius-sm);
   transition: color var(--transition), background var(--transition);
   white-space: nowrap;
@@ -208,7 +214,7 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 .header-right {
   display: flex;
   align-items: center;
-  gap: var(--sp-4);
+  gap: var(--sp-3);
   flex-shrink: 0;
 }
 
@@ -1119,6 +1125,20 @@ input[type="range"] {
 .value-label { font-size: 0.875rem; color: var(--color-ink-light); font-weight: 500; }
 
 /* ── Responsive ───────────────────────────────────────────── */
+/* The header nav (8 links + club pills + badge + phone + 2 buttons)
+   needs ~1390px to lay out without crowding. Its container now caps
+   at 1500px (see .site-header .container above) instead of the
+   page's normal 1180px, so switch to the mobile/hamburger nav only
+   below the width where that wider container stops giving it enough
+   real room — not before, so desktop nav still shows on every
+   normal laptop/monitor width. */
+@media (max-width: 1500px) {
+  .header-nav  { display: none; }
+  .no-fee-badge { display: none; }
+  .header-phone  { display: none; }
+  .hamburger { display: flex; }
+}
+
 @media (max-width: 1024px) {
   .grid-4        { grid-template-columns: repeat(2, 1fr); }
   .value-grid    { grid-template-columns: repeat(2, 1fr); }
@@ -1129,11 +1149,6 @@ input[type="range"] {
 @media (max-width: 768px) {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.6rem; }
-
-  .header-nav  { display: none; }
-  .no-fee-badge { display: none; }
-  .header-phone  { display: none; }
-  .hamburger { display: flex; }
 
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .two-col   { grid-template-columns: 1fr; gap: var(--sp-8); }

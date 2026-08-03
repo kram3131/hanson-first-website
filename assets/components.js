@@ -18,7 +18,6 @@ function renderHeader() {
           <img src="${root}logos/NewHansonLogo.png" alt="Hanson Insurance Agency" />
         </a>
         <nav class="header-nav" aria-label="Main navigation">
-          <a href="${root}index.html">Home</a>
           <a href="${root}about.html">About</a>
           <a href="${root}team.html">Team</a>
           <a href="${root}club-medicare/index.html" class="nav-pill-medicare">Club Medicare</a>
