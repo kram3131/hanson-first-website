@@ -71,7 +71,7 @@ function renderFooter() {
           <div class="footer-logo">
             <img src="${root}logos/NewHansonLogo.png" alt="Hanson Insurance Agency" />
           </div>
-          <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in 37 states from Liberty Hill, TX.</p>
+          <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in <span class="js-state-count">37</span> states from Liberty Hill, TX.</p>
           <div class="footer-contact">
             <a href="tel:5128176906">📞 512-817-6906</a>
             <a class="js-email" data-user="Emily" data-domain="HansonFirst.com" href="#">✉️ <span class="js-email-text">Emily [at] HansonFirst.com</span></a>
@@ -134,7 +134,7 @@ function renderFooter() {
         </div>
         <div class="footer-badges">
           <span class="footer-badge">HIPAA Compliant</span>
-          <span class="footer-badge">Licensed in 37 States</span>
+          <span class="footer-badge">Licensed in <span class="js-state-count">37</span> States</span>
           <span class="footer-badge">No Broker Fees.</span>
         </div>
       </div>
@@ -201,6 +201,69 @@ function revealEmails() {
   });
 }
 
+/* ── Live stats (agent count + licensed states) ──────────── */
+/* The "X licensed advisors" and "licensed in X states" copy    */
+/* around the site is pulled live from the same Google Sheet    */
+/* that manages the Team page and the new "States" tab, so the  */
+/* numbers always agree with the actual lists. The hardcoded    */
+/* numbers in the HTML act as fallbacks: if the Sheet can't be  */
+/* reached, the page just keeps showing them.                   */
+/*                                                              */
+/* To use in page copy:                                         */
+/*   <span class="js-agent-count">24</span> licensed advisors   */
+/*   licensed in <span class="js-state-count">37</span> states  */
+/* To render the full state pill grid from the sheet, give the  */
+/* grid container id="states-grid" (about.html does this).      */
+const STATS_SHEET_ID = '1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI';
+
+function fetchSheetRows(tabName) {
+  const url = 'https://docs.google.com/spreadsheets/d/' + STATS_SHEET_ID +
+              '/gviz/tq?tqx=out:json&headers=1&sheet=' +
+              encodeURIComponent(tabName) + '&_=' + Date.now();
+  return fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+      return (json.table && json.table.rows) || [];
+    });
+}
+
+function initLiveStats() {
+  const agentEls = document.querySelectorAll('.js-agent-count');
+  const stateEls = document.querySelectorAll('.js-state-count');
+  const statesGrid = document.getElementById('states-grid');
+
+  if (agentEls.length > 0) {
+    fetchSheetRows('Team').then(rows => {
+      // Same rule as the team page grid: a row counts if it has a
+      // first or last name (columns A/B of the Team tab).
+      const count = rows.filter(row => {
+        const first = (row.c && row.c[0] && row.c[0].v != null) ? String(row.c[0].v).trim() : '';
+        const last  = (row.c && row.c[1] && row.c[1].v != null) ? String(row.c[1].v).trim() : '';
+        return first !== '' || last !== '';
+      }).length;
+      if (count > 0) agentEls.forEach(el => { el.textContent = count; });
+    }).catch(() => {}); // fallback: hardcoded number stays
+  }
+
+  if (stateEls.length > 0 || statesGrid) {
+    fetchSheetRows('States').then(rows => {
+      const states = rows
+        .map(row => (row.c && row.c[0] && row.c[0].v != null) ? String(row.c[0].v).trim() : '')
+        .filter(s => s !== '');
+      if (states.length === 0) return;
+      stateEls.forEach(el => { el.textContent = states.length; });
+      if (statesGrid) {
+        statesGrid.innerHTML = states
+          .sort((a, b) => a.localeCompare(b))
+          .map(s => '<div class="state-pill">' +
+            s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>')
+          .join('');
+      }
+    }).catch(() => {}); // fallback: hardcoded pills/numbers stay
+  }
+}
+
 /* ── Init all ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
@@ -209,4 +272,5 @@ document.addEventListener('DOMContentLoaded', () => {
   revealEmails();
   initAccordions();
   initTestimonialFilter();
+  initLiveStats();
 });
