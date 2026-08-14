@@ -95,8 +95,11 @@ var TEAM_TAB = "Team";
 
     // The initial-avatar is always rendered. If a photo file is named, an <img>
     // is laid over it; on a 404 the <img> removes itself and the initials show.
+    // Note: no loading="lazy" here — lazy-loading proved unreliable for
+    // these absolutely-positioned overlay images (the fetch never fired
+    // in some engines), and the headshots are the page's core content.
     var photoOverlay = agent.photo
-      ? '<img src="' + esc(photoSrc(agent.photo)) + '" alt="' + esc(agent.first + ' ' + agent.last) + '" loading="lazy" ' +
+      ? '<img src="' + esc(photoSrc(agent.photo)) + '" alt="' + esc(agent.first + ' ' + agent.last) + '" ' +
         'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.remove();">'
       : '';
 
