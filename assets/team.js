@@ -27,10 +27,10 @@
      Photo File      Filename of the headshot in /agents/ (e.g. tia-pruett.jpg)
                      Leave blank to use a colored-initial avatar instead.
      Booking Link    Optional URL for the advisor's Calendly / booking page
-     Phone           Optional phone number, e.g. 512-555-0100. For advisors
-                     without a booking link: their card shows a "Call" button
-                     that dials this number instead. (If both are filled in,
-                     the booking link wins.)
+     Phone           Optional phone number, e.g. 512-555-0100. Shows on the
+                     advisor's card as a click-to-call link whenever filled
+                     in — with or without a booking link. Advisors who book
+                     by phone only can leave Booking Link blank.
      Notes           Optional short blurb shown on the card
    ============================================================ */
 
@@ -76,15 +76,18 @@ var TEAM_TAB = "Team";
         'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.remove();">'
       : '';
 
-    // One CTA per card: a booking link wins; otherwise a phone number
-    // becomes a click-to-call button; neither → no button.
-    var bookingBtn = '';
-    if (agent.booking) {
-      bookingBtn = '<a href="' + esc(agent.booking) + '" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="margin-top:14px;width:100%;">Book a time →</a>';
-    } else if (agent.phone) {
+    // Phone always shows on the card when filled in (click-to-call).
+    // The booking button renders independently, so an advisor can have
+    // phone only, booking only, or both.
+    var phoneLine = '';
+    if (agent.phone) {
       var dial = agent.phone.replace(/[^\d+]/g, '');
-      bookingBtn = '<a href="tel:' + esc(dial) + '" class="btn btn-outline btn-sm" style="margin-top:14px;width:100%;">📞 Call ' + esc(agent.phone) + '</a>';
+      phoneLine = '<a href="tel:' + esc(dial) + '" style="display:block;margin-top:12px;font-size:.9rem;font-weight:600;color:var(--color-ink);">📞 ' + esc(agent.phone) + '</a>';
     }
+
+    var bookingBtn = agent.booking
+      ? '<a href="' + esc(agent.booking) + '" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="margin-top:10px;width:100%;">Book a time →</a>'
+      : '';
 
     var notes = agent.notes
       ? '<p class="agent-bio" style="font-size:.85rem;color:var(--color-ink-mid);margin-top:8px;">' + esc(agent.notes) + '</p>'
@@ -101,6 +104,7 @@ var TEAM_TAB = "Team";
           '<div class="agent-title">' + esc(agent.role) + '</div>' +
           notes +
           '<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;">' + clubBadges + '</div>' +
+          phoneLine +
           bookingBtn +
         '</div>' +
       '</div>';
