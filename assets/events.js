@@ -16,7 +16,9 @@
    Changes appear on the website within about a minute.
 
    ── SHEET COLUMNS (row 1 must be these headers) ─────────────
-     Date           e.g. 2026-06-10   (controls automatic fall-off)
+     Date           e.g. 2026-06-10   (controls automatic fall-off
+                    for a normal one-time event — see "Recurring"
+                    below for a standing daily/weekly event)
      Time           e.g. 1:00 PM – 3:00 PM   (events on the same
                     day are shown in time order, earliest first)
      Area           Medicare, Health, or Life   (sets the color)
@@ -29,6 +31,18 @@
      Carrier        e.g. "Aetna", "Humana" — lets visitors filter
                     events by carrier at the top of the page.
                     Leave blank if an event isn't carrier-specific.
+     Recurring      Leave blank for a normal one-time event. Put
+                    "Yes" for a standing event that repeats every
+                    weekday/week over a date range (e.g. an open
+                    house running all through AEP) — this shows as
+                    a single pinned banner above the regular list
+                    instead of needing one row per day.
+     End Date       Only used when Recurring is "Yes" — the last
+                    day the banner should show (e.g. 2026-12-07).
+                    The Date column becomes the day the banner
+                    should start showing; it won't appear before
+                    that date, and disappears automatically after
+                    End Date, same as a normal event falling off.
      Register Link  where the button goes (e.g. book.html)
 
    The Location and Carrier filter dropdowns at the top of the
@@ -159,6 +173,35 @@ var EVENTS_TAB = "Events";
               '<span style="font-size:.8rem;color:var(--color-ink-light);">' + e.icon + ' ' + esc(meta) + ' · ' + esc(e.time) + '</span>' +
               '<a href="' + esc(e.link) + '" class="btn btn-' + e.accent + ' btn-sm">Register →</a>' +
             '</div>' +
+          '</div>' +
+        '</div>';
+    }).join("");
+  }
+
+  // Standing events (e.g. a weekday open house running through AEP) —
+  // shown as a pinned banner above the regular list rather than one
+  // row per day. Only rendered while today falls within the row's
+  // start Date / End Date window (handled by the caller).
+  function renderRecurring(container, recurringEvents) {
+    if (!container) return;
+    if (recurringEvents.length === 0) { container.innerHTML = ""; return; }
+
+    container.innerHTML = recurringEvents.map(function (e) {
+      var d = e.endDateObj;
+      var through = MONTHS[d.getMonth()].charAt(0) + MONTHS[d.getMonth()].slice(1).toLowerCase() +
+                    ' ' + d.getDate();
+      var meta = e.venue;
+      if (e.location) meta += ' · ' + e.location;
+      if (e.carrier) meta += ' · ' + e.carrier;
+      return '' +
+        '<div class="callout callout-' + e.accent + '" style="margin-bottom:24px;">' +
+          '<div class="callout-icon">🔁</div>' +
+          '<div>' +
+            '<h4 style="color:var(--' + e.accent + '-dark);">' + esc(e.title) + ' — ongoing through ' + through + '</h4>' +
+            '<p style="color:var(--' + e.accent + '-dark);opacity:.85;margin-top:4px;font-weight:600;">' + e.icon + ' ' + esc(e.time) + '</p>' +
+            '<p style="color:var(--' + e.accent + '-dark);opacity:.85;margin-top:4px;">' + esc(e.description) + '</p>' +
+            '<p style="color:var(--' + e.accent + '-dark);opacity:.7;margin-top:8px;font-size:.85rem;">' + esc(meta) + '</p>' +
+            '<a href="' + esc(e.link) + '" class="btn btn-' + e.accent + ' btn-sm" style="margin-top:12px;">Learn More →</a>' +
           '</div>' +
         '</div>';
     }).join("");
@@ -296,11 +339,13 @@ var EVENTS_TAB = "Events";
         var today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        var events = rows.map(function (row) {
+        var allRows = rows.map(function (row) {
           var area = cell(row, "area");
           var time = cell(row, "time");
           return {
             dateObj: parseDate(cell(row, "date")),
+            endDateObj: parseDate(cell(row, "end date")),
+            recurring: /^y/i.test(String(cell(row, "recurring") || "").trim()),
             time: time,
             timeMinutes: parseTimeMinutes(time),
             area: area,
@@ -314,9 +359,19 @@ var EVENTS_TAB = "Events";
             accent: accentOf(area),
             icon: iconOf(cell(row, "format"))
           };
-        })
-        .filter(function (e) {
-          return e.dateObj && e.title && e.dateObj >= today;
+        });
+
+        // Recurring rows (e.g. a weekday open house running through AEP)
+        // are shown as a single pinned banner, active only for the window
+        // between the start Date and End Date — never mixed into the
+        // date-sorted list, since they don't have one specific date.
+        var recurring = allRows.filter(function (e) {
+          return e.recurring && e.title && e.dateObj && e.endDateObj &&
+                 today >= e.dateObj && today <= e.endDateObj;
+        });
+
+        var events = allRows.filter(function (e) {
+          return !e.recurring && e.dateObj && e.title && e.dateObj >= today;
         })
         .sort(function (a, b) {
           var dateDiff = a.dateObj - b.dateObj;
@@ -324,6 +379,8 @@ var EVENTS_TAB = "Events";
         });
 
         allUpcomingEvents = events;
+
+        renderRecurring(document.getElementById("events-recurring"), recurring);
 
         if (events.length === 0) {
           var filtersContainer = document.getElementById("events-filters");
