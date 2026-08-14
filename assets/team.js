@@ -24,8 +24,20 @@
      Role            e.g. Licensed Insurance Advisor, Principal Advisor
      Clubs           Comma- or slash-separated: Medicare, Health, Life
                      (or "All" for all three)
-     Photo File      Filename of the headshot in /agents/ (e.g. tia-pruett.jpg)
+     Photo File      The advisor's headshot. Accepts any of:
+                       • a Google Drive share link — upload the photo to
+                         Drive, right-click it → Share → set "Anyone with
+                         the link" → Copy link → paste it here. This is
+                         the self-serve way to add or swap a photo: no
+                         website deploy needed, the change is live within
+                         a minute.
+                       • a filename in the site's /agents/ folder
+                         (e.g. tia-pruett.jpg) — the studio-processed
+                         photos with uniform framing live there.
+                       • any full image URL (https://…)
                      Leave blank to use a colored-initial avatar instead.
+                     If a link is wrong or not shared publicly, the card
+                     just shows the initials avatar — never a broken image.
      Booking Link    Optional URL for the advisor's Calendly / booking page
      Phone           Optional phone number, e.g. 512-555-0100. Shows on the
                      advisor's card as a click-to-call link whenever filled
@@ -63,6 +75,18 @@ var TEAM_TAB = "Team";
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  // Resolves the "Photo File" cell into an image URL. Accepts a Google
+  // Drive share link (converted to Drive's image CDN), any full http(s)
+  // URL, or a bare filename in the site's /agents/ folder.
+  function photoSrc(value) {
+    var v = String(value || "").trim();
+    if (!v) return "";
+    var m = v.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?[^ ]*id=)([\w-]+)/);
+    if (m) return "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w1200";
+    if (/^https?:\/\//i.test(v)) return v;
+    return "agents/" + v;
+  }
+
   function cardHtml(agent) {
     var clubBadges = agent.clubs.map(function (c) {
       var label = c.charAt(0).toUpperCase() + c.slice(1);
@@ -72,7 +96,7 @@ var TEAM_TAB = "Team";
     // The initial-avatar is always rendered. If a photo file is named, an <img>
     // is laid over it; on a 404 the <img> removes itself and the initials show.
     var photoOverlay = agent.photo
-      ? '<img src="agents/' + esc(agent.photo) + '" alt="' + esc(agent.first + ' ' + agent.last) + '" loading="lazy" ' +
+      ? '<img src="' + esc(photoSrc(agent.photo)) + '" alt="' + esc(agent.first + ' ' + agent.last) + '" loading="lazy" ' +
         'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.remove();">'
       : '';
 
