@@ -21,10 +21,15 @@
                     below for a standing daily/weekly event)
      Time           e.g. 1:00 PM – 3:00 PM   (events on the same
                     day are shown in time order, earliest first)
-     Area           Medicare, Health, or Life   (sets the color)
+     Area           Medicare, Health, or Life   (sets the color,
+                    and lets visitors filter by club at the top
+                    of the page)
      Format         In Person or Webinar        (sets the icon)
      Title          the event name
      Description    one short paragraph
+     Host           agent's name, e.g. "Tia Pruett" — shown as
+                    "Hosted by ___" on the event card. Leave blank
+                    and it shows "Hanson Insurance" instead.
      Venue          place name, or "Zoom Webinar"
      Location       city, e.g. "Liberty Hill, TX" — lets visitors
                     filter events by city at the top of the page
@@ -141,13 +146,21 @@ var EVENTS_TAB = "Events";
           var carrierSelect = document.getElementById("events-filter-carrier");
           var locationSelect = document.getElementById("events-filter-location");
           var formatBar = document.getElementById("events-filter-format");
+          var areaBar = document.getElementById("events-filter-area");
           if (carrierSelect) carrierSelect.value = "";
           if (locationSelect) locationSelect.value = "";
           if (formatBar) {
             formatBar.querySelectorAll(".filter-btn").forEach(function (b) { b.classList.remove("active"); });
             formatBar.querySelector('[data-format=""]').classList.add("active");
           }
+          if (areaBar) {
+            areaBar.querySelectorAll(".filter-btn").forEach(function (b) {
+              b.classList.remove("active", "active-medicare", "active-health", "active-life");
+            });
+            areaBar.querySelector('[data-area=""]').classList.add("active");
+          }
           selectedFormatType = "";
+          selectedArea = "";
           applyFiltersAndRender();
         });
       }
@@ -168,6 +181,7 @@ var EVENTS_TAB = "Events";
           '<div class="event-body">' +
             '<div class="event-type">' + esc(e.area) + ' · ' + esc(e.format) + '</div>' +
             '<h4 style="color:var(--' + e.accent + '-dark);">' + esc(e.title) + '</h4>' +
+            '<p style="margin-top:4px;font-size:.8rem;color:var(--color-ink-light);">Hosted by ' + esc(e.host) + '</p>' +
             '<p style="margin-top:8px;font-size:.875rem;color:var(--color-ink-mid);">' + esc(e.description) + '</p>' +
             '<div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">' +
               '<span style="font-size:.8rem;color:var(--color-ink-light);">' + e.icon + ' ' + esc(meta) + ' · ' + esc(e.time) + '</span>' +
@@ -198,6 +212,7 @@ var EVENTS_TAB = "Events";
           '<div class="callout-icon">🔁</div>' +
           '<div>' +
             '<h4 style="color:var(--' + e.accent + '-dark);">' + esc(e.title) + ' — ongoing through ' + through + '</h4>' +
+            '<p style="color:var(--' + e.accent + '-dark);opacity:.7;margin-top:2px;font-size:.85rem;">Hosted by ' + esc(e.host) + '</p>' +
             '<p style="color:var(--' + e.accent + '-dark);opacity:.85;margin-top:4px;font-weight:600;">' + e.icon + ' ' + esc(e.time) + '</p>' +
             '<p style="color:var(--' + e.accent + '-dark);opacity:.85;margin-top:4px;">' + esc(e.description) + '</p>' +
             '<p style="color:var(--' + e.accent + '-dark);opacity:.7;margin-top:8px;font-size:.85rem;">' + esc(meta) + '</p>' +
@@ -221,25 +236,38 @@ var EVENTS_TAB = "Events";
   }
 
   var selectedFormatType = ""; // "", "in-person", or "virtual"
+  var selectedArea = "";       // "", "medicare", "health", or "life"
 
   function renderFilters(filtersContainer, allEvents) {
     if (!filtersContainer) return;
 
     selectedFormatType = "";
+    selectedArea = "";
     var carriers = uniqueValues(allEvents, "carrier");
     var locations = uniqueValues(allEvents, "location");
     var hasInPerson = allEvents.some(function (e) { return !isVirtual(e.format); });
     var hasVirtual = allEvents.some(function (e) { return isVirtual(e.format); });
+    var areasPresent = uniqueValues(allEvents, "accent"); // "medicare"/"health"/"life"
 
-    if (carriers.length === 0 && locations.length === 0 && !(hasInPerson && hasVirtual)) {
+    if (carriers.length === 0 && locations.length === 0 &&
+        !(hasInPerson && hasVirtual) && areasPresent.length <= 1) {
       filtersContainer.innerHTML = "";
       return;
     }
 
     var html = "";
 
-    // Only worth showing the In Person/Virtual toggle when events span
-    // both — no point offering a choice that doesn't change anything.
+    // Only worth showing a toggle when events actually span more than
+    // one option — no point offering a choice that can't change anything.
+    if (areasPresent.length > 1) {
+      html += '<div class="filter-bar" id="events-filter-area">' +
+        '<button type="button" class="filter-btn active" data-area="">All Clubs</button>' +
+        '<button type="button" class="filter-btn" data-area="medicare">Club Medicare</button>' +
+        '<button type="button" class="filter-btn" data-area="health">Club Health</button>' +
+        '<button type="button" class="filter-btn" data-area="life">Club Life</button>' +
+        '</div>';
+    }
+
     if (hasInPerson && hasVirtual) {
       html += '<div class="filter-bar" id="events-filter-format">' +
         '<button type="button" class="filter-btn active" data-format="">All</button>' +
@@ -271,6 +299,21 @@ var EVENTS_TAB = "Events";
     if (carrierSelect) carrierSelect.addEventListener("change", applyFiltersAndRender);
     if (locationSelect) locationSelect.addEventListener("change", applyFiltersAndRender);
 
+    var areaBar = document.getElementById("events-filter-area");
+    if (areaBar) {
+      areaBar.addEventListener("click", function (ev) {
+        var btn = ev.target.closest("button[data-area]");
+        if (!btn) return;
+        areaBar.querySelectorAll(".filter-btn").forEach(function (b) {
+          b.classList.remove("active", "active-medicare", "active-health", "active-life");
+        });
+        var area = btn.dataset.area;
+        btn.classList.add(area ? "active-" + area : "active");
+        selectedArea = area;
+        applyFiltersAndRender();
+      });
+    }
+
     var formatBar = document.getElementById("events-filter-format");
     if (formatBar) {
       formatBar.addEventListener("click", function (ev) {
@@ -298,7 +341,8 @@ var EVENTS_TAB = "Events";
     var filtered = allUpcomingEvents.filter(function (e) {
       return (!carrier || e.carrier === carrier) &&
              (!location || e.location === location) &&
-             (!selectedFormatType || (selectedFormatType === "virtual") === isVirtual(e.format));
+             (!selectedFormatType || (selectedFormatType === "virtual") === isVirtual(e.format)) &&
+             (!selectedArea || e.accent === selectedArea);
     });
 
     render(container, filtered);
@@ -352,6 +396,7 @@ var EVENTS_TAB = "Events";
             format: cell(row, "format"),
             title: cell(row, "title"),
             description: cell(row, "description"),
+            host: String(cell(row, "host") || "").trim() || "Hanson Insurance",
             venue: cell(row, "venue"),
             location: String(cell(row, "location") || "").trim(),
             carrier: String(cell(row, "carrier") || "").trim(),
