@@ -85,11 +85,14 @@ var EVENTS_TAB = "Events";
     return "medicare";
   }
 
-  function iconOf(format) {
+  function isVirtual(format) {
     var f = String(format || "").toLowerCase();
-    if (f.indexOf("webinar") > -1 || f.indexOf("online") > -1 ||
-        f.indexOf("zoom") > -1 || f.indexOf("virtual") > -1) return "💻";
-    return "📍";
+    return f.indexOf("webinar") > -1 || f.indexOf("online") > -1 ||
+           f.indexOf("zoom") > -1 || f.indexOf("virtual") > -1;
+  }
+
+  function iconOf(format) {
+    return isVirtual(format) ? "💻" : "📍";
   }
 
   // Escape sheet text so a stray < or & can never break the page.
@@ -123,8 +126,14 @@ var EVENTS_TAB = "Events";
           ev.preventDefault();
           var carrierSelect = document.getElementById("events-filter-carrier");
           var locationSelect = document.getElementById("events-filter-location");
+          var formatBar = document.getElementById("events-filter-format");
           if (carrierSelect) carrierSelect.value = "";
           if (locationSelect) locationSelect.value = "";
+          if (formatBar) {
+            formatBar.querySelectorAll(".filter-btn").forEach(function (b) { b.classList.remove("active"); });
+            formatBar.querySelector('[data-format=""]').classList.add("active");
+          }
+          selectedFormatType = "";
           applyFiltersAndRender();
         });
       }
@@ -168,18 +177,35 @@ var EVENTS_TAB = "Events";
     return values;
   }
 
+  var selectedFormatType = ""; // "", "in-person", or "virtual"
+
   function renderFilters(filtersContainer, allEvents) {
     if (!filtersContainer) return;
 
+    selectedFormatType = "";
     var carriers = uniqueValues(allEvents, "carrier");
     var locations = uniqueValues(allEvents, "location");
+    var hasInPerson = allEvents.some(function (e) { return !isVirtual(e.format); });
+    var hasVirtual = allEvents.some(function (e) { return isVirtual(e.format); });
 
-    if (carriers.length === 0 && locations.length === 0) {
+    if (carriers.length === 0 && locations.length === 0 && !(hasInPerson && hasVirtual)) {
       filtersContainer.innerHTML = "";
       return;
     }
 
-    var html = '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">';
+    var html = "";
+
+    // Only worth showing the In Person/Virtual toggle when events span
+    // both — no point offering a choice that doesn't change anything.
+    if (hasInPerson && hasVirtual) {
+      html += '<div class="filter-bar" id="events-filter-format">' +
+        '<button type="button" class="filter-btn active" data-format="">All</button>' +
+        '<button type="button" class="filter-btn" data-format="in-person">📍 In Person</button>' +
+        '<button type="button" class="filter-btn" data-format="virtual">💻 Virtual</button>' +
+        '</div>';
+    }
+
+    html += '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">';
     if (carriers.length > 0) {
       html += '<div class="form-group" style="min-width:200px;">' +
         '<label class="form-label" for="events-filter-carrier">Filter by Carrier</label>' +
@@ -201,6 +227,18 @@ var EVENTS_TAB = "Events";
     var locationSelect = document.getElementById("events-filter-location");
     if (carrierSelect) carrierSelect.addEventListener("change", applyFiltersAndRender);
     if (locationSelect) locationSelect.addEventListener("change", applyFiltersAndRender);
+
+    var formatBar = document.getElementById("events-filter-format");
+    if (formatBar) {
+      formatBar.addEventListener("click", function (ev) {
+        var btn = ev.target.closest("button[data-format]");
+        if (!btn) return;
+        formatBar.querySelectorAll(".filter-btn").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        selectedFormatType = btn.dataset.format;
+        applyFiltersAndRender();
+      });
+    }
   }
 
   var allUpcomingEvents = [];
@@ -216,7 +254,8 @@ var EVENTS_TAB = "Events";
 
     var filtered = allUpcomingEvents.filter(function (e) {
       return (!carrier || e.carrier === carrier) &&
-             (!location || e.location === location);
+             (!location || e.location === location) &&
+             (!selectedFormatType || (selectedFormatType === "virtual") === isVirtual(e.format));
     });
 
     render(container, filtered);
