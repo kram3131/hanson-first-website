@@ -145,10 +145,12 @@ var EVENTS_TAB = "Events";
           ev.preventDefault();
           var carrierSelect = document.getElementById("events-filter-carrier");
           var locationSelect = document.getElementById("events-filter-location");
+          var hostSelect = document.getElementById("events-filter-host");
           var formatBar = document.getElementById("events-filter-format");
           var areaBar = document.getElementById("events-filter-area");
           if (carrierSelect) carrierSelect.value = "";
           if (locationSelect) locationSelect.value = "";
+          if (hostSelect) hostSelect.value = "";
           if (formatBar) {
             formatBar.querySelectorAll(".filter-btn").forEach(function (b) { b.classList.remove("active"); });
             formatBar.querySelector('[data-format=""]').classList.add("active");
@@ -245,11 +247,12 @@ var EVENTS_TAB = "Events";
     selectedArea = "";
     var carriers = uniqueValues(allEvents, "carrier");
     var locations = uniqueValues(allEvents, "location");
+    var hosts = uniqueValues(allEvents, "host");
     var hasInPerson = allEvents.some(function (e) { return !isVirtual(e.format); });
     var hasVirtual = allEvents.some(function (e) { return isVirtual(e.format); });
     var areasPresent = uniqueValues(allEvents, "accent"); // "medicare"/"health"/"life"
 
-    if (carriers.length === 0 && locations.length === 0 &&
+    if (carriers.length === 0 && locations.length === 0 && hosts.length === 0 &&
         !(hasInPerson && hasVirtual) && areasPresent.length <= 1) {
       filtersContainer.innerHTML = "";
       return;
@@ -291,13 +294,22 @@ var EVENTS_TAB = "Events";
         locations.map(function (l) { return '<option value="' + esc(l) + '">' + esc(l) + '</option>'; }).join("") +
         '</select></div>';
     }
+    if (hosts.length > 0) {
+      html += '<div class="form-group" style="min-width:200px;">' +
+        '<label class="form-label" for="events-filter-host">Filter by Host</label>' +
+        '<select class="form-select" id="events-filter-host"><option value="">All Hosts</option>' +
+        hosts.map(function (h) { return '<option value="' + esc(h) + '">' + esc(h) + '</option>'; }).join("") +
+        '</select></div>';
+    }
     html += '</div>';
     filtersContainer.innerHTML = html;
 
     var carrierSelect = document.getElementById("events-filter-carrier");
     var locationSelect = document.getElementById("events-filter-location");
+    var hostSelect = document.getElementById("events-filter-host");
     if (carrierSelect) carrierSelect.addEventListener("change", applyFiltersAndRender);
     if (locationSelect) locationSelect.addEventListener("change", applyFiltersAndRender);
+    if (hostSelect) hostSelect.addEventListener("change", applyFiltersAndRender);
 
     var areaBar = document.getElementById("events-filter-area");
     if (areaBar) {
@@ -335,12 +347,15 @@ var EVENTS_TAB = "Events";
 
     var carrierSelect = document.getElementById("events-filter-carrier");
     var locationSelect = document.getElementById("events-filter-location");
+    var hostSelect = document.getElementById("events-filter-host");
     var carrier = carrierSelect ? carrierSelect.value : "";
     var location = locationSelect ? locationSelect.value : "";
+    var host = hostSelect ? hostSelect.value : "";
 
     var filtered = allUpcomingEvents.filter(function (e) {
       return (!carrier || e.carrier === carrier) &&
              (!location || e.location === location) &&
+             (!host || e.host === host) &&
              (!selectedFormatType || (selectedFormatType === "virtual") === isVirtual(e.format)) &&
              (!selectedArea || e.accent === selectedArea);
     });
