@@ -62,6 +62,10 @@ var TAB_MAP = {
   testimonial: "Testimonial Submissions"
 };
 
+// Who gets an email alert for each new submission. Comma-separated
+// to add more, e.g. "emily@hansonfirst.com, mark@laimen.ai"
+var NOTIFY_EMAILS = "emily@hansonfirst.com";
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -85,6 +89,27 @@ function doPost(e) {
     var row = [new Date()];
     keys.forEach(function (k) { row.push(data[k]); });
     sheet.appendRow(row);
+
+    // Email alert — wrapped so a mail hiccup never loses the submission
+    // (the row above is already saved by this point).
+    try {
+      var lines = keys.map(function (k) {
+        return k + ": " + String(data[k]);
+      });
+      MailApp.sendEmail({
+        to: NOTIFY_EMAILS,
+        subject: "New website submission: " + tabName.replace(/s$/, ""),
+        body:
+          "A new submission just came in from the website.\n\n" +
+          "Type: " + tabName + "\n" +
+          "Time: " + new Date().toLocaleString() + "\n\n" +
+          lines.join("\n") + "\n\n" +
+          "View all submissions:\n" +
+          "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit"
+      });
+    } catch (mailErr) {
+      // Ignore: capture succeeded, only the notification failed.
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ status: "ok" }))
