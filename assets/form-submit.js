@@ -12,7 +12,7 @@
    that's the only code change needed to turn this on.
    ============================================================ */
 
-var WEB_APP_URL = ""; // e.g. "https://script.google.com/macros/s/AKfycb.../exec"
+var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrFPd1cEjrbtjCYZp87ijm79hWgURRUSAkMkdoGdA7lWPyqmb25OKYjpM3IezlHwE7/exec";
 
 function submitToSheet(formType, data) {
   if (!WEB_APP_URL) return Promise.resolve();
