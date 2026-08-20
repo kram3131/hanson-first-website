@@ -49,11 +49,17 @@
     { "source": "/update-form/", "destination": "/forms.html", "permanent": true },
 
     { "source": "/wp-content/uploads/:path*", "destination": "/forms.html", "permanent": true },
+    { "source": "/wp-content/uploads/:path*/", "destination": "/forms.html", "permanent": true },
 
     { "source": "/tag/:slug*", "destination": "/", "permanent": true },
+    { "source": "/tag/:slug*/", "destination": "/", "permanent": true },
     { "source": "/type/:slug*", "destination": "/", "permanent": true },
+    { "source": "/type/:slug*/", "destination": "/", "permanent": true },
     { "source": "/author/:slug*", "destination": "/", "permanent": true },
+    { "source": "/author/:slug*/", "destination": "/", "permanent": true },
     { "source": "/category/:slug*", "destination": "/", "permanent": true },
-    { "source": "/blocks/:slug*", "destination": "/", "permanent": true }
+    { "source": "/category/:slug*/", "destination": "/", "permanent": true },
+    { "source": "/blocks/:slug*", "destination": "/", "permanent": true },
+    { "source": "/blocks/:slug*/", "destination": "/", "permanent": true }
   ]
 }
