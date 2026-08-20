@@ -1,0 +1,59 @@
+{
+  "redirects": [
+    { "source": "/about-us", "destination": "/about.html", "permanent": true },
+    { "source": "/about-us/", "destination": "/about.html", "permanent": true },
+
+    { "source": "/contact-us", "destination": "/contact.html", "permanent": true },
+    { "source": "/contact-us/", "destination": "/contact.html", "permanent": true },
+
+    { "source": "/about-medicare", "destination": "/club-medicare/index.html", "permanent": true },
+    { "source": "/about-medicare/", "destination": "/club-medicare/index.html", "permanent": true },
+
+    { "source": "/book-online", "destination": "/book.html", "permanent": true },
+    { "source": "/book-online/", "destination": "/book.html", "permanent": true },
+
+    { "source": "/events", "destination": "/events.html", "permanent": true },
+    { "source": "/events/", "destination": "/events.html", "permanent": true },
+
+    { "source": "/testimonials", "destination": "/testimonials.html", "permanent": true },
+    { "source": "/testimonials/", "destination": "/testimonials.html", "permanent": true },
+
+    { "source": "/forms", "destination": "/forms.html", "permanent": true },
+    { "source": "/forms/", "destination": "/forms.html", "permanent": true },
+
+    { "source": "/how-inflation-reduction-act-affect-me", "destination": "/club-medicare/2026-updates.html", "permanent": true },
+    { "source": "/how-inflation-reduction-act-affect-me/", "destination": "/club-medicare/2026-updates.html", "permanent": true },
+
+    { "source": "/scope-of-appointment", "destination": "/forms.html#soa-form", "permanent": true },
+    { "source": "/scope-of-appointment/", "destination": "/forms.html#soa-form", "permanent": true },
+
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html", "permanent": true },
+    { "source": "/privacy-policy/", "destination": "/privacy-policy.html", "permanent": true },
+
+    { "source": "/terms-of-use", "destination": "/privacy-policy.html", "permanent": true },
+    { "source": "/terms-of-use/", "destination": "/privacy-policy.html", "permanent": true },
+
+    { "source": "/medicare-101", "destination": "/events.html", "permanent": true },
+    { "source": "/medicare-101/", "destination": "/events.html", "permanent": true },
+    { "source": "/medicare-workshop-learn-how-to-navigate-the-maze-4", "destination": "/events.html", "permanent": true },
+    { "source": "/medicare-workshop-learn-how-to-navigate-the-maze-4/", "destination": "/events.html", "permanent": true },
+    { "source": "/club-medicare-estate-planning-101-wills-vs-trusts", "destination": "/events.html", "permanent": true },
+    { "source": "/club-medicare-estate-planning-101-wills-vs-trusts/", "destination": "/events.html", "permanent": true },
+    { "source": "/category/on-demand-webinars", "destination": "/events.html", "permanent": true },
+    { "source": "/category/on-demand-webinars/", "destination": "/events.html", "permanent": true },
+
+    { "source": "/gallery", "destination": "/about.html", "permanent": true },
+    { "source": "/gallery/", "destination": "/about.html", "permanent": true },
+
+    { "source": "/update-form", "destination": "/forms.html", "permanent": true },
+    { "source": "/update-form/", "destination": "/forms.html", "permanent": true },
+
+    { "source": "/wp-content/uploads/:path*", "destination": "/forms.html", "permanent": true },
+
+    { "source": "/tag/:slug*", "destination": "/", "permanent": true },
+    { "source": "/type/:slug*", "destination": "/", "permanent": true },
+    { "source": "/author/:slug*", "destination": "/", "permanent": true },
+    { "source": "/category/:slug*", "destination": "/", "permanent": true },
+    { "source": "/blocks/:slug*", "destination": "/", "permanent": true }
+  ]
+}
