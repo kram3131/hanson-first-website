@@ -130,7 +130,7 @@ function renderFooter() {
       </div>
       <div class="footer-bottom">
         <div class="footer-copyright">
-          &copy; ${new Date().getFullYear()} Hanson Insurance Agency. All rights reserved. Liberty Hill, TX.
+          &copy; ${new Date().getFullYear()} Hanson Insurance, LLC. All rights reserved. Liberty Hill, TX.
         </div>
         <div class="footer-badges">
           <span class="footer-badge">HIPAA Compliant</span>
