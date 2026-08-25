@@ -406,6 +406,7 @@ p { color: var(--color-ink-mid); line-height: 1.7; }
 .badge {
   display: inline-flex;
   align-items: center;
+  gap: var(--sp-1);
   padding: 4px 12px;
   border-radius: var(--radius-pill);
   font-size: 0.78rem;

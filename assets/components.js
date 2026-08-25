@@ -79,8 +79,9 @@ function renderFooter() {
             <a href="${root}book.html">📅 Book an Appointment</a>
           </div>
           <div class="footer-social">
-            <a href="#" class="social-icon" aria-label="Facebook">f</a>
-            <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+            <a href="https://www.facebook.com/yourmedicarespecialisttexas" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">f</a>
+            <a href="https://www.linkedin.com/in/emilyhansoninsurance/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">in</a>
+            <a href="https://www.instagram.com/hanson.insurance/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">ig</a>
             <a href="https://www.youtube.com/@hansoninsuranceagency9070/featured" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">▶</a>
           </div>
         </div>
