@@ -257,8 +257,10 @@
       var heading = fallback.querySelector('h4');
       if (bookingState.topic === null) {
         heading.textContent = 'Choose a topic above to see available times.';
+      } else if (bookingState.topic === 'medicare' && !bookingState.medicareSubtype) {
+        heading.textContent = 'Choose New or Existing Client above to see available times.';
       } else {
-        heading.textContent = 'This calendar link is being finalized.';
+        heading.textContent = "We're having trouble loading the calendar.";
       }
     }
   }
