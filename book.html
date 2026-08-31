@@ -137,7 +137,17 @@
               <p>Or call <a href="tel:5128176906" style="font-weight:600;">512-817-6906</a> and we'll get you booked directly.</p>
             </div>
           </div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <script>
+            // The widget script loads async, so it can still be mid-flight
+            // when a visitor clicks a topic — that click falls back to the
+            // "trouble loading" message with nothing to retry it. This hook
+            // lets the later booking script re-render once Calendly is
+            // actually ready, regardless of which happens first.
+            function onCalendlyScriptLoaded() {
+              if (typeof window.__hansonCalendlyRetry === 'function') window.__hansonCalendlyRetry();
+            }
+          </script>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async onload="onCalendlyScriptLoaded()"></script>
           <p style="margin-top:12px;font-size:.85rem;color:var(--color-ink-mid);text-align:center;">Trouble viewing the calendar? <a href="https://calendly.com/emily-hansonfirst" target="_blank" style="color:var(--medicare-primary);font-weight:600;">Open Calendly in a new tab →</a></p>
         </div>
       </div>
@@ -212,6 +222,10 @@
   var CALENDLY_GENERIC_URL = "https://calendly.com/emily-hansonfirst";
 
   var bookingState = { topic: null, medicareSubtype: null };
+  var lastRequestedUrl = null;
+  window.__hansonCalendlyRetry = function () {
+    if (lastRequestedUrl) renderCalendly(lastRequestedUrl);
+  };
 
   function selectTopic(topicKey, el) {
     bookingState.topic = topicKey;
@@ -245,6 +259,7 @@
   function renderCalendly(url) {
     var container = document.getElementById('calendly-container');
     var fallback = document.getElementById('calendly-fallback');
+    lastRequestedUrl = url;
 
     if (url && typeof Calendly !== 'undefined' && Calendly.initInlineWidget) {
       container.hidden = false;
