@@ -108,7 +108,13 @@ function doPost(e) {
           "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit"
       });
     } catch (mailErr) {
-      // Ignore: capture succeeded, only the notification failed.
+      // Capture succeeded either way — only the notification failed.
+      // Logged (not thrown) so it's visible in Executions without
+      // ever losing the submission itself. A common cause: MailApp
+      // needs its send-email scope re-authorized after this code is
+      // added — run doPost once from the editor to trigger the
+      // authorization prompt, then redeploy (New version).
+      console.error("Email alert failed: " + mailErr);
     }
 
     return ContentService
