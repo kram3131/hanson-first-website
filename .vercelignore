@@ -1,0 +1,22 @@
+# Vercel CLI uploads the whole working folder (it does NOT honor
+# .gitignore), so anything not listed here becomes a public URL on the
+# live site. Keep internal/off-topic files out of the deployment.
+
+# Internal docs / source that is not part of the website
+HANSON_BUILD_SPEC.md
+google-apps-script/
+.claude/
+.git/
+.gitignore
+.vercelignore
+.DS_Store
+*.md
+
+# Off-topic working files that happen to live in this folder
+Solidarity_Community_FCU_Website_Compilation.docx
+ted-framework/
+ted-framework-workspace/
+*.skill
+*.pdf
+ai-failure-rate-social.*
+claude-m365-social.*

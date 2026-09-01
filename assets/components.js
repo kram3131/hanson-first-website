@@ -104,7 +104,7 @@ function renderFooter() {
             <a href="${root}club-health/index.html">Health Overview</a>
             <a href="${root}club-health/aca-marketplace.html">ACA Marketplace</a>
             <a href="${root}club-health/individual-family.html">Individual &amp; Family</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfj7fO_VLcRAWZxU6d4j6IJJOUkSe1p7HojB9edztHuZ2Yg_A/viewform" target="_blank">Get a Quote</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfj7fO_VLcRAWZxU6d4j6IJJOUkSe1p7HojB9edztHuZ2Yg_A/viewform" target="_blank" rel="noopener">Get a Quote</a>
           </div>
           <div class="footer-col-title" style="margin-top:24px;">Club Life</div>
           <div class="footer-links">
