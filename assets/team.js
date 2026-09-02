@@ -22,6 +22,10 @@
      First Name      e.g. Tia
      Last Name       e.g. Pruett
      Role            e.g. Licensed Insurance Advisor, Principal Advisor
+                     Add the word "Veteran" (or "Navy Veteran", "Army
+                     Veteran", etc.) anywhere in this cell to show a flag
+                     badge on the advisor's photo. The word is dropped from
+                     the title line automatically so it isn't shown twice.
      Clubs           Comma- or slash-separated: Medicare, Health, Life
                      (or "All" for all three)
      Photo File      The advisor's headshot. Accepts any of:
@@ -75,6 +79,22 @@ var TEAM_TAB = "Team";
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
+  // "Veteran" anywhere in the Role cell (e.g. "Licensed Insurance Advisor,
+  // Veteran" or "Navy Veteran") puts a small flag badge on the photo. The
+  // branch, if named, is shown too; the word is then dropped from the
+  // title line so it isn't repeated.
+  function veteranOf(role) {
+    var r = String(role || "");
+    if (!/\bveteran\b/i.test(r)) return null;
+    var branch = (r.match(/\b(Navy|Army|Air Force|Marine Corps|Marines|Marine|Coast Guard|Space Force)\b/i) || [])[1];
+    var label = branch ? branch + " Veteran" : "Veteran";
+    var cleaned = r
+      .replace(/\b(Navy|Army|Air Force|Marine Corps|Marines|Marine|Coast Guard|Space Force)\s+Veteran\b/i, "")
+      .replace(/\bVeteran\b/i, "")
+      .replace(/\s*,\s*,/g, ",").replace(/^\s*,\s*|\s*,\s*$/g, "").replace(/\s{2,}/g, " ").trim();
+    return { label: label, role: cleaned || "Licensed Insurance Advisor" };
+  }
+
   // Resolves the "Photo File" cell into an image URL. Accepts a Google
   // Drive share link (converted to Drive's image CDN), any full http(s)
   // URL, or a bare filename in the site's /agents/ folder.
@@ -120,15 +140,26 @@ var TEAM_TAB = "Team";
       ? '<p class="agent-bio" style="font-size:.85rem;color:var(--color-ink-mid);margin-top:8px;">' + esc(agent.notes) + '</p>'
       : '';
 
+    var vet = veteranOf(agent.role);
+    var veteranBadge = vet
+      ? '<span class="agent-veteran" title="' + esc(vet.label) + '" ' +
+        'style="position:absolute;top:10px;right:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;' +
+        'padding:4px 9px;border-radius:999px;background:var(--color-ink);color:#fff;' +
+        'font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.25);">' +
+        '🇺🇸 ' + esc(vet.label) + '</span>'
+      : '';
+    var titleText = vet ? vet.role : agent.role;
+
     return '' +
       '<div class="agent-card" data-clubs="' + agent.clubs.join(' ') + '">' +
         '<div class="agent-photo" style="position:relative;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-ink-mid,#666);font-size:2.4rem;font-weight:700;aspect-ratio:1/1;overflow:hidden;">' +
           esc(agent.initials) +
           photoOverlay +
+          veteranBadge +
         '</div>' +
         '<div class="agent-info">' +
           '<div class="agent-name">' + esc(agent.first + ' ' + agent.last) + '</div>' +
-          '<div class="agent-title">' + esc(agent.role) + '</div>' +
+          '<div class="agent-title">' + esc(titleText) + '</div>' +
           notes +
           '<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;">' + clubBadges + '</div>' +
           phoneLine +

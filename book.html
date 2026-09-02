@@ -86,13 +86,13 @@
             </div>
           </div>
 
-          <!-- Medicare sub-choice: which Calendly link depends on new vs existing client -->
-          <div id="medicare-subrow" class="topic-subrow" hidden>
-            <div class="card topic-card topic-subcard" data-accent="medicare" onclick="selectMedicareSubtype('new', this)">
+          <!-- Sub-choice: each club's Calendly link depends on new vs existing client -->
+          <div id="medicare-subrow" class="topic-subrow" data-accent="medicare" hidden>
+            <div class="card topic-card topic-subcard" data-accent="medicare" onclick="selectSubtype('medicare', 'new', this)">
               <h5 style="color:var(--medicare-dark);">New Client</h5>
               <p style="font-size:.8rem;color:var(--medicare-dark);opacity:.8;">Haven't worked with us before</p>
             </div>
-            <div class="card topic-card topic-subcard" data-accent="medicare" onclick="selectMedicareSubtype('existing', this)">
+            <div class="card topic-card topic-subcard" data-accent="medicare" onclick="selectSubtype('medicare', 'existing', this)">
               <h5 style="color:var(--medicare-dark);">Existing Client</h5>
               <p style="font-size:.8rem;color:var(--medicare-dark);opacity:.8;">Already a Club Medicare member</p>
             </div>
@@ -107,6 +107,17 @@
               </div>
             </div>
           </div>
+
+          <div id="health-subrow" class="topic-subrow" data-accent="health" hidden>
+            <div class="card topic-card topic-subcard" data-accent="health" onclick="selectSubtype('health', 'new', this)">
+              <h5 style="color:var(--health-dark);">New Client</h5>
+              <p style="font-size:.8rem;color:var(--health-dark);opacity:.8;">Haven't worked with us before</p>
+            </div>
+            <div class="card topic-card topic-subcard" data-accent="health" onclick="selectSubtype('health', 'existing', this)">
+              <h5 style="color:var(--health-dark);">Existing Client</h5>
+              <p style="font-size:.8rem;color:var(--health-dark);opacity:.8;">Already a Club Health member</p>
+            </div>
+          </div>
           <div class="card topic-card" data-accent="life" onclick="selectTopic('life', this)">
             <div style="display:flex;gap:12px;align-items:center;">
               <div><img src="logos/clublife.png" alt="Club Life" style="height:36px;width:36px;border-radius:50%;"></div>
@@ -114,6 +125,17 @@
                 <h5 style="color:var(--life-dark);">Club Life</h5>
                 <p style="font-size:.85rem;color:var(--color-ink-mid);">Term, whole, final expense, or universal life insurance</p>
               </div>
+            </div>
+          </div>
+
+          <div id="life-subrow" class="topic-subrow" data-accent="life" hidden>
+            <div class="card topic-card topic-subcard" data-accent="life" onclick="selectSubtype('life', 'new', this)">
+              <h5 style="color:var(--life-dark);">New Client</h5>
+              <p style="font-size:.8rem;color:var(--life-dark);opacity:.8;">Haven't worked with us before</p>
+            </div>
+            <div class="card topic-card topic-subcard" data-accent="life" onclick="selectSubtype('life', 'existing', this)">
+              <h5 style="color:var(--life-dark);">Existing Client</h5>
+              <p style="font-size:.8rem;color:var(--life-dark);opacity:.8;">Already a Club Life member</p>
             </div>
           </div>
           <a href="contact.html" class="card topic-card" data-accent="general">
@@ -148,7 +170,7 @@
             }
           </script>
           <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async onload="onCalendlyScriptLoaded()"></script>
-          <p style="margin-top:12px;font-size:.85rem;color:var(--color-ink-mid);text-align:center;">Trouble viewing the calendar? <a href="https://calendly.com/emily-hansonfirst" target="_blank" rel="noopener" style="color:var(--medicare-primary);font-weight:600;">Open Calendly in a new tab →</a></p>
+          <p style="margin-top:12px;font-size:.85rem;color:var(--color-ink-mid);text-align:center;">Trouble viewing the calendar? <a href="https://calendly.com/d/dtc4-ycb-tgt" target="_blank" rel="noopener" style="color:var(--medicare-primary);font-weight:600;">Open Calendly in a new tab →</a></p>
         </div>
       </div>
 
@@ -164,10 +186,10 @@
                 <div style="font-size:.8rem;color:var(--color-ink-light);">Click to call on mobile</div>
               </div>
             </a>
-            <a class="js-email" data-user="Emily" data-domain="HansonFirst.com" href="#" style="display:flex;gap:12px;align-items:center;text-decoration:none;">
+            <a class="js-email" data-user="admin" data-domain="HansonFirst.com" href="#" style="display:flex;gap:12px;align-items:center;text-decoration:none;">
               <div style="width:44px;height:44px;background:var(--health-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">✉️</div>
               <div>
-                <div class="js-email-text" style="font-weight:600;color:var(--color-ink);">Emily [at] HansonFirst.com</div>
+                <div class="js-email-text" style="font-weight:600;color:var(--color-ink);">admin [at] HansonFirst.com</div>
                 <div style="font-size:.8rem;color:var(--color-ink-light);">Click to email Emily</div>
               </div>
             </a>
@@ -212,19 +234,24 @@
   // triggers the friendly fallback panel automatically — the page
   // ships fine with all of these empty and works as links arrive.
   var CALENDLY_LINKS = {
-    // Calendly share links (the /emily-hansonfirst/*-clone slugs are stale
-    // names from cloned events and point at the *opposite* club — verified
-    // against Calendly's event-type lookup 2026-09-01).
-    health: "https://calendly.com/d/d3z6-ncs-bc8/under-65-health-insurance-consultation",
-    life:   "https://calendly.com/d/dv9m-f98-5hc/life-insurance-consultation",
+    // Every club has a New Client / Existing Client Calendly link.
     medicare: {
       new:      "https://calendly.com/d/csgt-267-6jy",
       existing: "https://calendly.com/d/cw4n-hs3-5st"
+    },
+    health: {
+      new:      "https://calendly.com/d/dv6z-45q-myg",
+      existing: "https://calendly.com/d/d3nz-ttq-qy4"
+    },
+    life: {
+      new:      "https://calendly.com/d/d34j-r47-xdp",
+      existing: "https://calendly.com/d/d3nt-9mp-4sv"
     }
   };
-  var CALENDLY_GENERIC_URL = "https://calendly.com/emily-hansonfirst";
+  // Agency-wide landing page, used by the "Open Calendly in a new tab" link.
+  var CALENDLY_GENERIC_URL = "https://calendly.com/d/dtc4-ycb-tgt";
 
-  var bookingState = { topic: null, medicareSubtype: null };
+  var bookingState = { topic: null, subtype: null };
   var lastRequestedUrl = null;
   window.__hansonCalendlyRetry = function () {
     if (lastRequestedUrl) renderCalendly(lastRequestedUrl);
@@ -232,31 +259,29 @@
 
   function selectTopic(topicKey, el) {
     bookingState.topic = topicKey;
-    bookingState.medicareSubtype = null;
+    bookingState.subtype = null;
 
     document.querySelectorAll('.topic-card:not(.topic-subcard)').forEach(function (c) {
       c.classList.remove('selected');
     });
     el.classList.add('selected');
 
-    var subrow = document.getElementById('medicare-subrow');
-    if (topicKey === 'medicare') {
-      subrow.hidden = false;
-      subrow.querySelectorAll('.topic-subcard').forEach(function (c) { c.classList.remove('selected'); });
-      renderCalendly(null); // wait for New/Existing choice
-    } else {
-      subrow.hidden = true;
-      renderCalendly(CALENDLY_LINKS[topicKey]);
-    }
+    // Show only this club's New/Existing row; clear any previous sub-choice.
+    document.querySelectorAll('.topic-subrow').forEach(function (row) {
+      var mine = row.id === topicKey + '-subrow';
+      row.hidden = !mine;
+      row.querySelectorAll('.topic-subcard').forEach(function (c) { c.classList.remove('selected'); });
+    });
+    renderCalendly(null); // wait for New/Existing choice
   }
 
-  function selectMedicareSubtype(subtype, el) {
-    bookingState.medicareSubtype = subtype;
-    document.querySelectorAll('#medicare-subrow .topic-subcard').forEach(function (c) {
+  function selectSubtype(topicKey, subtype, el) {
+    bookingState.subtype = subtype;
+    document.querySelectorAll('#' + topicKey + '-subrow .topic-subcard').forEach(function (c) {
       c.classList.remove('selected');
     });
     el.classList.add('selected');
-    renderCalendly(CALENDLY_LINKS.medicare[subtype]);
+    renderCalendly(CALENDLY_LINKS[topicKey][subtype]);
   }
 
   function renderCalendly(url) {
@@ -275,7 +300,7 @@
       var heading = fallback.querySelector('h4');
       if (bookingState.topic === null) {
         heading.textContent = 'Choose a topic above to see available times.';
-      } else if (bookingState.topic === 'medicare' && !bookingState.medicareSubtype) {
+      } else if (!bookingState.subtype) {
         heading.textContent = 'Choose New or Existing Client above to see available times.';
       } else {
         heading.textContent = "We're having trouble loading the calendar.";
