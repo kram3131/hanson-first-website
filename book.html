@@ -151,7 +151,12 @@
 
         <!-- Calendly inline embed -->
         <div style="margin-top:32px;">
-          <div id="calendly-container" class="calendly-inline-widget" style="min-width:320px;height:720px;" hidden></div>
+          <!-- data-auto-load="false" is required: Calendly's widget.js auto-scans
+               every .calendly-inline-widget on load and injects an embed from
+               data-url. We have no data-url (the URL depends on the club and
+               New/Existing choice), so without this flag Calendly's own blank
+               auto-embed races our initInlineWidget() call and sometimes wins. -->
+          <div id="calendly-container" class="calendly-inline-widget" data-auto-load="false" style="min-width:320px;height:720px;" hidden></div>
           <div id="calendly-fallback" class="callout">
             <div class="callout-icon">📅</div>
             <div>
@@ -170,7 +175,7 @@
             }
           </script>
           <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async onload="onCalendlyScriptLoaded()"></script>
-          <p style="margin-top:12px;font-size:.85rem;color:var(--color-ink-mid);text-align:center;">Trouble viewing the calendar? <a href="https://calendly.com/d/dtc4-ycb-tgt" target="_blank" rel="noopener" style="color:var(--medicare-primary);font-weight:600;">Open Calendly in a new tab →</a></p>
+          <p style="margin-top:12px;font-size:.85rem;color:var(--color-ink-mid);text-align:center;">Trouble viewing the calendar? <a id="calendly-open-link" href="https://calendly.com/d/dtc4-ycb-tgt" target="_blank" rel="noopener" style="color:var(--medicare-primary);font-weight:600;">Open Calendly in a new tab →</a></p>
         </div>
       </div>
 
@@ -284,27 +289,69 @@
     renderCalendly(CALENDLY_LINKS[topicKey][subtype]);
   }
 
+  var renderAttempt = 0;   // increments per request so stale timers bail out
+  var embedRetried = false;
+
+  function calendlyReady() {
+    return typeof Calendly !== 'undefined' && !!Calendly.initInlineWidget;
+  }
+
   function renderCalendly(url) {
     var container = document.getElementById('calendly-container');
     var fallback = document.getElementById('calendly-fallback');
+    var openLink = document.getElementById('calendly-open-link');
     lastRequestedUrl = url;
+    var attempt = ++renderAttempt;
 
-    if (url && typeof Calendly !== 'undefined' && Calendly.initInlineWidget) {
+    // "Open in a new tab" always points at the specific calendar once one
+    // is chosen, so a visitor has a working path even if the embed fails.
+    if (openLink) openLink.href = url || CALENDLY_GENERIC_URL;
+
+    if (url && calendlyReady()) {
       container.hidden = false;
       fallback.hidden = true;
       container.innerHTML = '';
       Calendly.initInlineWidget({ url: url + '?hide_gdpr_banner=1', parentElement: container });
+
+      // Self-check: Calendly should have injected an iframe within a couple
+      // of seconds. If not (e.g. its own load-time scan interfered), retry
+      // once, then hand the visitor the direct link instead of a blank box.
+      setTimeout(function () {
+        if (attempt !== renderAttempt) return;            // a newer choice superseded this one
+        if (container.querySelector('iframe')) { embedRetried = false; return; }
+        if (!embedRetried) { embedRetried = true; renderCalendly(url); return; }
+        embedRetried = false;
+        showFallback("We're having trouble loading the calendar.");
+      }, 2500);
+      return;
+    }
+
+    if (url && !calendlyReady()) {
+      // Widget script still loading: show the waiting message and poll for
+      // it (the script's onload hook also retries — this covers the case
+      // where that fires before this script is defined).
+      showFallback('Loading the calendar…');
+      var waited = 0;
+      (function poll() {
+        if (attempt !== renderAttempt) return;
+        if (calendlyReady()) { renderCalendly(url); return; }
+        waited += 250;
+        if (waited >= 10000) { showFallback("We're having trouble loading the calendar."); return; }
+        setTimeout(poll, 250);
+      })();
+      return;
+    }
+
+    if (bookingState.topic === null) {
+      showFallback('Choose a topic above to see available times.');
     } else {
+      showFallback('Choose New or Existing Client above to see available times.');
+    }
+
+    function showFallback(text) {
       container.hidden = true;
       fallback.hidden = false;
-      var heading = fallback.querySelector('h4');
-      if (bookingState.topic === null) {
-        heading.textContent = 'Choose a topic above to see available times.';
-      } else if (!bookingState.subtype) {
-        heading.textContent = 'Choose New or Existing Client above to see available times.';
-      } else {
-        heading.textContent = "We're having trouble loading the calendar.";
-      }
+      fallback.querySelector('h4').textContent = text;
     }
   }
 </script>
