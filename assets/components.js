@@ -74,7 +74,7 @@ function renderFooter() {
           <p class="footer-tagline">Real people. Real coverage. Your whole life.<br>Independent broker serving clients in <span class="js-state-count">37</span> states from Liberty Hill, TX.</p>
           <div class="footer-contact">
             <a href="tel:5128176906">📞 512-817-6906</a>
-            <a class="js-email" data-user="Emily" data-domain="HansonFirst.com" href="#">✉️ <span class="js-email-text">Emily [at] HansonFirst.com</span></a>
+            <a class="js-email" data-user="admin" data-domain="HansonFirst.com" href="#">✉️ <span class="js-email-text">admin [at] HansonFirst.com</span></a>
             <a href="https://maps.google.com/?q=13985+TX-29,+Liberty+Hill,+TX+78642" target="_blank" rel="noopener">📍 13985 TX-29, Liberty Hill, TX 78642</a>
             <a href="${root}book.html">📅 Book an Appointment</a>
           </div>
@@ -118,7 +118,7 @@ function renderFooter() {
         <div>
           <div class="footer-col-title">Company</div>
           <div class="footer-links">
-            <a href="${root}about.html">About Emily</a>
+            <a href="${root}about.html">About Us</a>
             <a href="${root}team.html">Meet the Team</a>
             <a href="${root}testimonials.html">Testimonials</a>
             <a href="${root}events.html">Events &amp; Webinars</a>

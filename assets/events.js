@@ -128,7 +128,7 @@ var EVENTS_TAB = "Events";
         '<p style="margin-top:8px;font-size:.9rem;color:var(--color-ink-mid);">' +
           'New workshops and webinars are added regularly. Check back soon, or ' +
           '<a href="contact.html" style="color:var(--medicare-primary);font-weight:600;">contact us</a> ' +
-          'to schedule a one-on-one with Emily.</p>' +
+          'to schedule a one-on-one with an advisor.</p>' +
       '</div>';
   }
 
