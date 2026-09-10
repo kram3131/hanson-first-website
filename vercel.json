@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.hansonfirst.com" }],
+      "destination": "https://hansonfirst.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.hansonfirst.com" }],
       "destination": "https://hansonfirst.com/:path*",
