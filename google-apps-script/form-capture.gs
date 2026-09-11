@@ -73,7 +73,7 @@ var SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI";
 // NOTIFY_EMAILS. Leave AGENT_INTAKE_SHEET_ID blank and everything
 // still works — submissions just land in the main shared Sheet
 // (Agent Intake Submissions tab) until you set this up.
-var AGENT_INTAKE_SHEET_ID = "";
+var AGENT_INTAKE_SHEET_ID = "1js4dprqzcj_ISM456yZSRpd8pK4KXstEkMugFQ_eY78";
 var AGENT_INTAKE_NOTIFY_EMAIL = "mark@laimen.ai";
 
 var TAB_MAP = {

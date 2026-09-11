@@ -28,12 +28,14 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-# Defaults to the main shared Sheet. Once a private intake Sheet exists
-# (see AGENT_INTAKE_SHEET_ID in google-apps-script/form-capture.gs) and
-# submissions are landing there instead, pass --sheet-id or set this
-# constant to that Sheet's ID — the tab name stays "Agent Intake
-# Submissions" either way.
-SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI"
+# The private intake Sheet (matches AGENT_INTAKE_SHEET_ID in
+# google-apps-script/form-capture.gs — keep these two in sync). Only
+# readable because it's shared "Anyone with the link, Viewer" — the
+# actual privacy comes from this ID being an unguessable 44-character
+# string, not from requiring a Google login. Pass --sheet-id to read
+# somewhere else instead (e.g. the main shared Sheet, if intake
+# submissions were ever landing there before this was set up).
+SHEET_ID = "1js4dprqzcj_ISM456yZSRpd8pK4KXstEkMugFQ_eY78"
 TAB = "Agent Intake Submissions"
 
 
