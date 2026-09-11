@@ -48,17 +48,30 @@ the sitemap, `noindex`, found only by direct link). It's a real page on
 the live site, styled like the rest of it, and checks their name against
 the live Team sheet as they type (won't block submission, just warns).
 It posts through the same shared Apps Script every other form on the
-site uses, into a new "Agent Intake Submissions" tab — **the live
-deployed Apps Script needs the `agentIntake` entry from
-`google-apps-script/form-capture.gs`'s `TAB_MAP` before this works**; if
-that hasn't been redeployed yet (Manage deployments → Edit → New
-version), submissions land safely in "Unrecognized Submissions" instead
-of erroring, so nothing is lost, but check this before sending an agent
-the link. Once they submit, pull their row into a ready config:
+site uses. **The live deployed Apps Script needs two things from
+`google-apps-script/form-capture.gs` before this works** — check both
+before sending an agent the link:
+
+1. The `agentIntake` entry in `TAB_MAP`. If missing, submissions land
+   safely in "Unrecognized Submissions" instead of erroring, so nothing
+   is lost, but the converter won't find them by name.
+2. `AGENT_INTAKE_SHEET_ID` set to a **private** Sheet (create one via
+   sheets.new, share it with no one else, paste its ID in). This
+   submission carries an agent's bio, personal email, domain, and
+   whether they run their own separate business — deliberately kept
+   out of the main shared Sheet everyone with Sheet access can see.
+   Leave it blank and everything still works, just less privately
+   (lands in the main Sheet's "Agent Intake Submissions" tab instead,
+   and the alert email goes to `AGENT_INTAKE_NOTIFY_EMAIL` — still not
+   `NOTIFY_EMAILS`/Emily, but check both are actually set the way you
+   want before relying on it).
+
+Once an agent submits, pull their row into a ready config — pass
+`--sheet-id` if submissions are landing in the private Sheet:
 
 ```bash
 python3 tools/intake_to_config.py --list                       # see who's submitted
-python3 tools/intake_to_config.py --name "Tia Pruett" --out tools/agent-tia-pruett.json
+python3 tools/intake_to_config.py --name "Tia Pruett" --out tools/agent-tia-pruett.json --sheet-id {private-sheet-id-if-set}
 ```
 
 **Review the output before generating** — the converter deliberately

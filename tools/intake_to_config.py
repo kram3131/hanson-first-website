@@ -28,13 +28,18 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+# Defaults to the main shared Sheet. Once a private intake Sheet exists
+# (see AGENT_INTAKE_SHEET_ID in google-apps-script/form-capture.gs) and
+# submissions are landing there instead, pass --sheet-id or set this
+# constant to that Sheet's ID — the tab name stays "Agent Intake
+# Submissions" either way.
 SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI"
 TAB = "Agent Intake Submissions"
 
 
-def fetch_rows():
+def fetch_rows(sheet_id=SHEET_ID):
     url = (
-        f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq"
+        f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq"
         f"?tqx=out:json&headers=1&sheet={urllib.parse.quote(TAB)}"
     )
     with urllib.request.urlopen(url, timeout=20) as r:
@@ -134,9 +139,11 @@ def main():
     ap.add_argument("--name", help='Agent full name, e.g. "Tia Pruett" — matches First+Last from the form')
     ap.add_argument("--out", type=Path, help="where to write the config JSON")
     ap.add_argument("--list", action="store_true", help="list every submission found and exit")
+    ap.add_argument("--sheet-id", default=SHEET_ID,
+                     help="override if intake submissions have moved to a private Sheet")
     args = ap.parse_args()
 
-    rows = fetch_rows()
+    rows = fetch_rows(args.sheet_id)
     if args.list or not args.name:
         if not rows:
             print("No submissions found in 'Agent Intake Submissions' yet.")

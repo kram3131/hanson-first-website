@@ -62,6 +62,20 @@
 
 var SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI";
 
+// Agent intake submissions (agent-intake.html) carry private,
+// compliance-sensitive info about team members — their bio, personal
+// email, domain, and whether they run their own separate licensed
+// business. That should NOT be visible to everyone with access to the
+// main shared Sheet. Once you've created a separate private Sheet
+// (File -> New spreadsheet, share it with no one else) and pasted its
+// ID below, agentIntake submissions write there instead, and the
+// alert email goes only to AGENT_INTAKE_NOTIFY_EMAIL, never to
+// NOTIFY_EMAILS. Leave AGENT_INTAKE_SHEET_ID blank and everything
+// still works — submissions just land in the main shared Sheet
+// (Agent Intake Submissions tab) until you set this up.
+var AGENT_INTAKE_SHEET_ID = "";
+var AGENT_INTAKE_NOTIFY_EMAIL = "mark@laimen.ai";
+
 var TAB_MAP = {
   contact:     "Contact Submissions",
   joinus:      "Recruiting Applications",
@@ -81,8 +95,13 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
     var formType = data.formType;
     var tabName = TAB_MAP[formType] || "Unrecognized Submissions";
+    var isAgentIntake = formType === "agentIntake";
 
-    var ss = SpreadsheetApp.openById(SHEET_ID);
+    // Agent intake goes to its own private Sheet once one is
+    // configured (see AGENT_INTAKE_SHEET_ID above); every other form
+    // type is completely unaffected and keeps using the main Sheet.
+    var targetSheetId = (isAgentIntake && AGENT_INTAKE_SHEET_ID) ? AGENT_INTAKE_SHEET_ID : SHEET_ID;
+    var ss = SpreadsheetApp.openById(targetSheetId);
     var sheet = ss.getSheetByName(tabName);
     if (!sheet) {
       sheet = ss.insertSheet(tabName);
@@ -123,12 +142,16 @@ function doPost(e) {
     // NOTIFY_EMAILS exactly as before. A clone site's submissions DO
     // carry agentEmail — those go ONLY to that agent's own inbox, never
     // to NOTIFY_EMAILS, per the confirmed "agent-only, fully private"
-    // decision. No agent is ever given direct access to this Sheet, so
-    // the "view all submissions" link below is only included when
-    // mailing NOTIFY_EMAILS (Mark), who actually has access to it.
+    // decision. Agent intake submissions go only to
+    // AGENT_INTAKE_NOTIFY_EMAIL, never to NOTIFY_EMAILS — the alert
+    // body includes every field value, so this matters just as much as
+    // which Sheet the row lands in. No agent is ever given direct
+    // access to any Sheet, so the "view all submissions" link below is
+    // only included when mailing whoever actually has access to
+    // wherever this particular submission landed.
     try {
       var agentEmail = data.agentEmail || "";
-      var recipients = agentEmail || NOTIFY_EMAILS;
+      var recipients = agentEmail || (isAgentIntake ? AGENT_INTAKE_NOTIFY_EMAIL : NOTIFY_EMAILS);
       var lines = keys.map(function (k) {
         return k + ": " + String(sheetOnlyData[k]);
       });
@@ -140,7 +163,7 @@ function doPost(e) {
         lines.join("\n");
       if (!agentEmail) {
         body += "\n\nView all submissions:\n" +
-          "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit";
+          "https://docs.google.com/spreadsheets/d/" + targetSheetId + "/edit";
       }
       MailApp.sendEmail({
         to: recipients,
