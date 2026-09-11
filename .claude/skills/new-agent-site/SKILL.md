@@ -43,7 +43,7 @@ populate.
 ## Step 2 — Collect the remaining intake fields
 
 **Preferred path: self-serve.** Send the agent this link:
-`https://hansonfirst.com/agent-intake.html` (unlisted — not in nav or
+`https://hansonfirst.com/agent-intake-109ba324c909.html` (unlisted — not in nav or
 the sitemap, `noindex`, found only by direct link). It's a real page on
 the live site, styled like the rest of it, and checks their name against
 the live Team sheet as they type (won't block submission, just warns).

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-intake_to_config.py — turn one agent-intake.html submission into a
+intake_to_config.py — turn one agent-intake-109ba324c909.html submission into a
 ready generate_clone.py config.
 
-The self-serve form (agent-intake.html) writes each submission as a row
+The self-serve form (agent-intake-109ba324c909.html) writes each submission as a row
 in the shared Sheet's "Agent Intake Submissions" tab (via the same
 Apps Script every other form on the site already uses — see
 google-apps-script/form-capture.gs). This script fetches that tab,
