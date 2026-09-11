@@ -35,7 +35,7 @@ from pathlib import Path
 # string, not from requiring a Google login. Pass --sheet-id to read
 # somewhere else instead (e.g. the main shared Sheet, if intake
 # submissions were ever landing there before this was set up).
-SHEET_ID = "1js4dprqzcj_ISM456yZSRpd8pK4KXstEkMugFQ_eY78"
+SHEET_ID = "1wO4rZv7-NaTjJKG-poyEX57_OvXDLOJ7t_n86W4DZas"
 TAB = "Agent Intake Submissions"
 
 
