@@ -5,6 +5,7 @@
 # Internal docs / source that is not part of the website
 HANSON_BUILD_SPEC.md
 google-apps-script/
+tools/
 .claude/
 .git/
 .gitignore

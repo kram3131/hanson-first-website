@@ -1,0 +1,28 @@
+{
+  "$comment": "Reference schema for a per-agent clone config, consumed by generate_clone.py. Not machine-validated (no build step) — this file documents the shape by example. Copy tools/example-agent-config.json as a starting point.",
+  "agent_slug": "lowercase-hyphenated, e.g. tia-pruett — used for the GitHub repo name (hanson-{agent_slug}-website) and must match how this person's row is found in the live Team sheet by first+last name",
+  "first_name": "required, must match the Team sheet's First Name for this person",
+  "last_name": "required, must match the Team sheet's Last Name for this person",
+  "role": "required, free text, e.g. 'Licensed Insurance Advisor' or 'Licensed Insurance Advisor, Navy Veteran'",
+  "clubs": "required, array subset of ['medicare','health','life'] — which club page-sets/nav-links survive on this clone. Should match the Team sheet's Clubs column",
+  "photo": "required, a Google Drive share link OR a bare filename already in /agents/ OR a full https:// image URL",
+  "bio_paragraphs": "required, array of strings — the About-page narrative bio, each string is one <p>. Write these for real before launch; a placeholder is used if omitted, and the skill will flag it",
+  "personal_photos": "optional, array of 0-2 local file paths or URLs for an optional 'beyond the office' section on About — omit entirely to drop that section",
+  "phone": "required, e.g. '737-747-0026' (dashed, US format assumed)",
+  "email": "required, this agent's real personal/business email — used for JSON-LD, footer mailto, and routes every form-alert email on this site",
+  "calendly_url": "required, this agent's own single booking link (reuse the Team sheet's Booking Link column, don't re-collect)",
+  "office_hours": "optional, array of 3 {day, hours} objects (Mon-Fri, Sat, Sun) — omit to use Hanson's default (M-F 9-5 CT, Sat by appt, Sun closed)",
+  "service_area": "required, free text like 'Austin, TX area' or 'Serving clients across Texas' — NO street address is collected or shown anywhere on a clone, per the confirmed compliance decision",
+  "dba_name": "optional — a marketing/brand name for page titles, meta tags, and the JSON-LD 'name' field only (e.g. 'Happy Days Insurance'). Omit to just use the agent's own full name as the brand shown around the site. This is independent of legal_name below — someone can market under a DBA while still legally operating as a Hanson Insurance, LLC advisor",
+  "legal_name": "optional — leave null/omit to default to 'Hanson Insurance, LLC' exactly like the main site, used ONLY in the footer copyright line and legal-page body text (Privacy Policy, SMS Terms). Only set this to something else if is_separate_entity is true and this is that entity's real legal name",
+  "is_separate_entity": "required boolean — true only if this agent is licensed under their own separate agency (not just a marketing DBA name) rather than as a Hanson Insurance, LLC advisor. Flagged in the plan as compliance-sensitive: verify the real answer per agent, don't guess. When true, the footer gets an affiliation-disclosure line; when false, no disclosure is added even if dba_name is set",
+  "domain": "required, the agent's own domain, no protocol, e.g. 'tiapruettinsurance.com' — they must already own it or be ready to buy it before the skill's provisioning step runs",
+  "social": {
+    "facebook": "optional, full URL or null",
+    "linkedin": "optional, full URL or null",
+    "instagram": "optional, full URL or null",
+    "youtube": "optional, full URL or null"
+  },
+  "featured_testimonial": "optional {name, location, club, quote, stars} — if omitted, the homepage shows a link-only 'Read what clients say' teaser instead of a fabricated/borrowed quote",
+  "hero_video": "optional, a relative path to a replacement hero video file to copy into assets/ — omit to keep Hanson's generic hero video"
+}

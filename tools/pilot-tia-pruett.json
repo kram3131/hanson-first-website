@@ -1,0 +1,33 @@
+{
+  "agent_slug": "tia-pruett",
+  "first_name": "Tia",
+  "last_name": "Pruett",
+  "role": "Licensed Insurance Advisor",
+  "clubs": ["medicare", "health", "life"],
+  "photo": "https://drive.google.com/file/d/PLACEHOLDER_TEST_ONLY/view",
+  "bio_paragraphs": [
+    "Tia Pruett has spent years helping Texans and clients across the country make sense of Medicare, health, and life insurance without the confusion or the sales pressure.",
+    "She believes good advice should be free and honest, and that means shopping every carrier to find what actually fits your budget and your health needs, not whatever pays the biggest commission.",
+    "Whether you're turning 65 for the first time or just need someone to review your plan before Open Enrollment closes, Tia is a call or click away."
+  ],
+  "personal_photos": [],
+  "phone": "737-747-0026",
+  "email": "tia@tiapruettinsurance.com",
+  "calendly_url": "https://calendly.com/tia-hansonfirst",
+  "service_area": "Serving clients in Texas, Arizona, Oregon, Tennessee, Washington, and Wisconsin",
+  "is_separate_entity": false,
+  "domain": "tiapruettinsurance.com",
+  "social": {
+    "facebook": null,
+    "linkedin": null,
+    "instagram": null,
+    "youtube": null
+  },
+  "featured_testimonial": {
+    "name": "Michael D.",
+    "location": null,
+    "club": "medicare",
+    "quote": "Tia has always been so helpful and knowledgeable. She goes out of her way to make sure I understand everything.",
+    "stars": 5
+  }
+}

@@ -1,5 +1,7 @@
 .vercel
 .DS_Store
+__pycache__/
+*.pyc
 
 # Off-topic working files (not part of the site)
 *.skill

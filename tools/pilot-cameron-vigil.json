@@ -1,0 +1,27 @@
+{
+  "agent_slug": "cameron-vigil",
+  "first_name": "Cameron",
+  "last_name": "Vigil",
+  "role": "Licensed Insurance Advisor",
+  "clubs": ["medicare"],
+  "photo": "cameron-vigil.jpg",
+  "bio_paragraphs": [
+    "Cameron Vigil helps Texans navigate Medicare Advantage, Supplement, and Part D drug plans with zero pressure and zero cost.",
+    "He believes the best plan is the one that actually fits your doctors, your prescriptions, and your budget."
+  ],
+  "personal_photos": [],
+  "phone": "806-282-9301",
+  "email": "cameron@happydaysinsurance.com",
+  "calendly_url": "https://calendly.com/cameron-happydaysinsurance/30min",
+  "service_area": "Serving Medicare clients across Texas",
+  "dba_name": "Happy Days Insurance",
+  "is_separate_entity": true,
+  "legal_name": "Happy Days Insurance, LLC",
+  "domain": "happydaysinsurance.com",
+  "social": {
+    "facebook": "https://www.facebook.com/happydaysinsurance",
+    "linkedin": null,
+    "instagram": null,
+    "youtube": null
+  }
+}

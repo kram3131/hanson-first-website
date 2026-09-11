@@ -11,6 +11,12 @@
    vendor, no API key — just the Sheet you already manage Events/
    Team/Testimonials from.
 
+   This same deployment also serves every per-advisor clone site
+   (see tools/generate_clone.py) — one Web App URL for all of them,
+   no per-agent setup needed. A clone's submissions land in the same
+   shared tabs, but its email alert routes ONLY to that agent's own
+   inbox (see doPost's routing logic below), never to NOTIFY_EMAILS.
+
    ── ONE-TIME SETUP (Emily, or whoever owns the Sheet) ─────────
    1. Open the Sheet:
       https://docs.google.com/spreadsheets/d/1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI/edit
@@ -78,34 +84,64 @@ function doPost(e) {
       sheet = ss.insertSheet(tabName);
     }
 
+    // A per-advisor clone site's submissions carry two extra fields
+    // (agentSlug, agentEmail) used ONLY for the email routing below —
+    // they are never written to the Sheet. The header row for each tab
+    // was fixed once, back when that tab was first created, and never
+    // grows automatically; if a future submission's field set/order
+    // ever differed from the original, the row values would land in
+    // columns that no longer match the header above them, corrupting
+    // data already in use. Stripping these two fields before building
+    // the row keeps every tab's shape identical to what it's always
+    // been, on the main site and on every clone alike.
+    var sheetOnlyData = {};
+    for (var k in data) {
+      if (k !== "agentEmail" && k !== "agentSlug") sheetOnlyData[k] = data[k];
+    }
+
     // Every field except formType becomes a column. Header row is
     // built automatically from the first submission of each type.
-    var keys = Object.keys(data).filter(function (k) { return k !== "formType"; });
+    var keys = Object.keys(sheetOnlyData).filter(function (k) { return k !== "formType"; });
 
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(["Timestamp"].concat(keys));
     }
 
     var row = [new Date()];
-    keys.forEach(function (k) { row.push(data[k]); });
+    keys.forEach(function (k) { row.push(sheetOnlyData[k]); });
     sheet.appendRow(row);
 
     // Email alert — wrapped so a mail hiccup never loses the submission
     // (the row above is already saved by this point).
+    //
+    // Routing: the main site's own submissions have no agentEmail field
+    // at all (data.agentEmail is undefined), so they keep going to
+    // NOTIFY_EMAILS exactly as before. A clone site's submissions DO
+    // carry agentEmail — those go ONLY to that agent's own inbox, never
+    // to NOTIFY_EMAILS, per the confirmed "agent-only, fully private"
+    // decision. No agent is ever given direct access to this Sheet, so
+    // the "view all submissions" link below is only included when
+    // mailing NOTIFY_EMAILS (Mark), who actually has access to it.
     try {
+      var agentEmail = data.agentEmail || "";
+      var recipients = agentEmail || NOTIFY_EMAILS;
       var lines = keys.map(function (k) {
-        return k + ": " + String(data[k]);
+        return k + ": " + String(sheetOnlyData[k]);
       });
+      if (data.agentSlug) lines.unshift("Site: " + data.agentSlug);
+      var body =
+        "A new submission just came in from the website.\n\n" +
+        "Type: " + tabName + "\n" +
+        "Time: " + new Date().toLocaleString() + "\n\n" +
+        lines.join("\n");
+      if (!agentEmail) {
+        body += "\n\nView all submissions:\n" +
+          "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit";
+      }
       MailApp.sendEmail({
-        to: NOTIFY_EMAILS,
+        to: recipients,
         subject: "New website submission: " + tabName.replace(/s$/, ""),
-        body:
-          "A new submission just came in from the website.\n\n" +
-          "Type: " + tabName + "\n" +
-          "Time: " + new Date().toLocaleString() + "\n\n" +
-          lines.join("\n") + "\n\n" +
-          "View all submissions:\n" +
-          "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit"
+        body: body
       });
     } catch (mailErr) {
       // Capture succeeded either way — only the notification failed.
