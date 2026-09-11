@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Your Personal Site — Intake Form | Hanson Insurance</title>
+  <meta name="description" content="Tell us about yourself and we'll build your personal website." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<section class="hero page-hero">
+  <div class="container">
+    <div class="hero-content" style="max-width:680px;">
+      <h1>Let's build your personal site.</h1>
+      <p class="lead" style="color:rgba(255,255,255,0.8);margin-top:16px;">Fill this out once and we'll have your own website — your own domain, your own booking link, your own clients — up and running. Takes about 10 minutes. You can save your answers elsewhere and come back if you need to.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="max-width:680px;margin:0 auto;">
+
+      <div id="team-check" class="callout" style="margin-bottom:32px;display:none;"></div>
+
+      <form id="intake-form" class="card">
+
+        <!-- ── About You ─────────────────────────────────── -->
+        <h3 style="margin-bottom:4px;">About You</h3>
+        <p style="font-size:.85rem;color:var(--color-ink-mid);margin-bottom:20px;">This should match your name in the Hanson Team sheet exactly.</p>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="i-fname">First Name *</label>
+            <input class="form-input" type="text" id="i-fname" required placeholder="Jane" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i-lname">Last Name *</label>
+            <input class="form-input" type="text" id="i-lname" required placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-role">Your Title *</label>
+          <input class="form-input" type="text" id="i-role" required placeholder="Licensed Insurance Advisor" value="Licensed Insurance Advisor" />
+          <p style="font-size:.8rem;color:var(--color-ink-light);margin-top:6px;">Are you a military veteran? Add "Veteran" (or "Navy Veteran," "Army Veteran," etc.) to the end of your title — it automatically shows a badge on your site.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-photo">Your Headshot *</label>
+          <input class="form-input" type="text" id="i-photo" required placeholder="https://drive.google.com/file/d/..." />
+          <p style="font-size:.8rem;color:var(--color-ink-light);margin-top:6px;">Upload your photo to Google Drive, right-click it → Share → set "Anyone with the link" → Copy link → paste it here.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-bio">Your Bio *</label>
+          <textarea class="form-textarea" id="i-bio" required rows="8" placeholder="Write 2-4 short paragraphs about yourself: your background, why you got into insurance, and how you help clients. Separate each paragraph with a blank line — this becomes the main story on your About page."></textarea>
+        </div>
+
+        <!-- ── What You Offer ────────────────────────────── -->
+        <h3 style="margin:32px 0 4px;">What You Offer</h3>
+        <p style="font-size:.85rem;color:var(--color-ink-mid);margin-bottom:12px;">Your site will only show the club(s) you check here — this should match your Clubs column in the Team sheet.</p>
+        <div class="form-group" style="display:flex;gap:24px;flex-wrap:wrap;">
+          <label class="checkbox-group"><input type="checkbox" id="i-club-medicare" /><span>Club Medicare</span></label>
+          <label class="checkbox-group"><input type="checkbox" id="i-club-health" /><span>Club Health</span></label>
+          <label class="checkbox-group"><input type="checkbox" id="i-club-life" /><span>Club Life</span></label>
+        </div>
+
+        <!-- ── Contact & Booking ─────────────────────────── -->
+        <h3 style="margin:32px 0 4px;">Contact &amp; Booking</h3>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="i-phone">Your Phone *</label>
+            <input class="form-input" type="tel" id="i-phone" required placeholder="512-555-0100" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i-email">Your Email *</label>
+            <input class="form-input" type="email" id="i-email" required placeholder="you@example.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-calendly">Your Calendly/Booking Link *</label>
+          <input class="form-input" type="url" id="i-calendly" required placeholder="https://calendly.com/you" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-area">Service Area *</label>
+          <input class="form-input" type="text" id="i-area" required placeholder="Serving clients across Texas" />
+          <p style="font-size:.8rem;color:var(--color-ink-light);margin-top:6px;">A general description only — we never publish a street address on your personal site.</p>
+        </div>
+
+        <!-- ── Legal ──────────────────────────────────────── -->
+        <h3 style="margin:32px 0 4px;">Legal</h3>
+        <div class="form-group">
+          <label class="form-label">Are you operating under your own separately-licensed agency, or as a Hanson Insurance, LLC advisor? *</label>
+          <label class="checkbox-group" style="margin-top:8px;"><input type="radio" name="i-entity" id="i-entity-hanson" checked /><span>I'm a Hanson Insurance, LLC advisor (this is almost everyone — if you're not sure, pick this)</span></label>
+          <label class="checkbox-group" style="margin-top:6px;"><input type="radio" name="i-entity" id="i-entity-separate" /><span>I operate my own separately-licensed agency</span></label>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="i-dba">Business/Brand Name (optional)</label>
+          <input class="form-input" type="text" id="i-dba" placeholder="e.g. Happy Days Insurance" />
+          <p style="font-size:.8rem;color:var(--color-ink-light);margin-top:6px;">Leave blank to just use your own name on the site. If you operate your own agency, put its exact legal name here too.</p>
+        </div>
+
+        <!-- ── Your Domain ────────────────────────────────── -->
+        <h3 style="margin:32px 0 4px;">Your Domain</h3>
+        <div class="form-group">
+          <label class="form-label" for="i-domain">Your Website Address *</label>
+          <input class="form-input" type="text" id="i-domain" required placeholder="yourname.com (no https://)" />
+        </div>
+        <div class="form-group">
+          <label class="checkbox-group"><input type="radio" name="i-domain-status" id="i-domain-own" checked /><span>I already own this domain</span></label>
+          <label class="checkbox-group" style="margin-top:6px;"><input type="radio" name="i-domain-status" id="i-domain-buy" /><span>I still need to buy this domain</span></label>
+        </div>
+
+        <!-- ── Social (optional) ─────────────────────────── -->
+        <h3 style="margin:32px 0 4px;">Your Social Media (optional)</h3>
+        <p style="font-size:.85rem;color:var(--color-ink-mid);margin-bottom:12px;">Leave any of these blank if you don't have one — we'll only show icons for accounts you actually have.</p>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" for="i-facebook">Facebook</label>
+            <input class="form-input" type="url" id="i-facebook" placeholder="https://facebook.com/..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i-linkedin">LinkedIn</label>
+            <input class="form-input" type="url" id="i-linkedin" placeholder="https://linkedin.com/in/..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i-instagram">Instagram</label>
+            <input class="form-input" type="url" id="i-instagram" placeholder="https://instagram.com/..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="i-youtube">YouTube</label>
+            <input class="form-input" type="url" id="i-youtube" placeholder="https://youtube.com/@..." />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-lg" style="width:100%;margin-top:16px;">Submit My Info →</button>
+        <p style="font-size:.8rem;color:var(--color-ink-light);margin-top:12px;text-align:center;">Someone from the Hanson team will review this and follow up before your site goes live.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="site-footer"></footer>
+<script src="assets/components.js"></script>
+<script src="assets/form-submit.js"></script>
+<script>
+  /* ── Live check against the Team sheet ───────────────────────
+     Confirms a matching row exists before the agent spends 10
+     minutes filling this out — the generator can't run without
+     one (it's where the site's photo/phone/Booking Link/Clubs
+     stay self-serve-synced from after launch). */
+  var TEAM_SHEET_ID = "1sXGSpw-7-Tq1xpTVxbKU343rw9GDM9qHKVjY_fwd3uI";
+  var teamRow = null;
+
+  function checkTeamSheet() {
+    var first = document.getElementById("i-fname").value.trim();
+    var last = document.getElementById("i-lname").value.trim();
+    var box = document.getElementById("team-check");
+    if (!first || !last) { box.style.display = "none"; return; }
+
+    var url = "https://docs.google.com/spreadsheets/d/" + TEAM_SHEET_ID +
+              "/gviz/tq?tqx=out:json&headers=1&sheet=Team&_=" + Date.now();
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (text) {
+        var json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+        var cols = (json.table && json.table.cols) || [];
+        var rows = (json.table && json.table.rows) || [];
+        var idx = {};
+        cols.forEach(function (c, i) { idx[String(c.label || "").trim().toLowerCase()] = i; });
+        function cell(row, name) {
+          var i = idx[name];
+          if (i == null || !row.c || !row.c[i] || row.c[i].v == null) return "";
+          return row.c[i].v;
+        }
+        teamRow = rows.find(function (r) {
+          return String(cell(r, "first name")).trim().toLowerCase() === first.toLowerCase() &&
+                 String(cell(r, "last name")).trim().toLowerCase() === last.toLowerCase();
+        }) || null;
+
+        if (teamRow) {
+          box.className = "callout callout-medicare";
+          box.innerHTML = "<div class=\"callout-icon\">✅</div><div><h4 style=\"color:var(--medicare-dark);\">Found you in the Team sheet</h4><p style=\"color:var(--medicare-dark);opacity:.85;\">You're good to go — fill out the rest below.</p></div>";
+        } else {
+          box.className = "callout";
+          box.style.borderLeft = "4px solid #c0392b";
+          box.innerHTML = "<div class=\"callout-icon\">⚠️</div><div><h4 style=\"color:#c0392b;\">We don't see you in the Team sheet yet</h4><p>Your name needs to be added there before your site can be built. You can still fill this out — just let Mark know first so he can add your row.</p></div>";
+        }
+        box.style.display = "flex";
+      })
+      .catch(function () { box.style.display = "none"; }); // fail silent, never block the form
+  }
+  document.getElementById("i-fname").addEventListener("blur", checkTeamSheet);
+  document.getElementById("i-lname").addEventListener("blur", checkTeamSheet);
+
+  /* ── Submit ───────────────────────────────────────────────── */
+  document.getElementById("intake-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var form = e.target;
+    var val = function (id) { return document.getElementById(id).value.trim(); };
+    var checked = function (id) { return document.getElementById(id).checked; };
+
+    var clubs = [];
+    if (checked("i-club-medicare")) clubs.push("medicare");
+    if (checked("i-club-health")) clubs.push("health");
+    if (checked("i-club-life")) clubs.push("life");
+    if (clubs.length === 0) {
+      alert("Please check at least one club you offer.");
+      return;
+    }
+
+    var data = {
+      firstName: val("i-fname"),
+      lastName: val("i-lname"),
+      role: val("i-role"),
+      photo: val("i-photo"),
+      bio: val("i-bio"),
+      clubs: clubs.join(","),
+      phone: val("i-phone"),
+      email: val("i-email"),
+      calendlyUrl: val("i-calendly"),
+      serviceArea: val("i-area"),
+      isSeparateEntity: checked("i-entity-separate") ? "yes" : "no",
+      dbaName: val("i-dba"),
+      domain: val("i-domain"),
+      domainStatus: checked("i-domain-buy") ? "needs to buy" : "already owns",
+      facebook: val("i-facebook"),
+      linkedin: val("i-linkedin"),
+      instagram: val("i-instagram"),
+      youtube: val("i-youtube"),
+      teamSheetMatch: teamRow ? "yes" : "no"
+    };
+
+    submitToSheet("agentIntake", data).catch(function () {}).then(function () {
+      form.innerHTML = "<div style=\"text-align:center;padding:48px 0;\"><div style=\"font-size:3rem;\">✅</div><h3 style=\"margin-top:16px;\">Thanks — you're all set!</h3><p style=\"margin-top:12px;\">Someone from the Hanson team will reach out before your site goes live. If you need to make a change, just email us.</p></div>";
+    });
+  });
+</script>
+</body>
+</html>

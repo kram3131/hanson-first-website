@@ -42,42 +42,46 @@ populate.
 
 ## Step 2 — Collect the remaining intake fields
 
-Everything not already in the Sheet. Reference
-`tools/clone_config.schema.json` for the full field list and what each
-one means — read it now if this is your first time running this skill.
-In order:
+**Preferred path: self-serve.** Send the agent this link:
+`https://hansonfirst.com/agent-intake.html` (unlisted — not in nav or
+the sitemap, `noindex`, found only by direct link). It's a real page on
+the live site, styled like the rest of it, and checks their name against
+the live Team sheet as they type (won't block submission, just warns).
+It posts through the same shared Apps Script every other form on the
+site uses, into a new "Agent Intake Submissions" tab — **the live
+deployed Apps Script needs the `agentIntake` entry from
+`google-apps-script/form-capture.gs`'s `TAB_MAP` before this works**; if
+that hasn't been redeployed yet (Manage deployments → Edit → New
+version), submissions land safely in "Unrecognized Submissions" instead
+of erroring, so nothing is lost, but check this before sending an agent
+the link. Once they submit, pull their row into a ready config:
 
-1. **Identity**: first/last name (from Step 1), role/title, a real
-   multi-paragraph bio (do not write a placeholder and move on — ask
-   Mark for real bio text, or tell him it's needed before this can ship),
-   optional personal photos.
-2. **Licensing**: pull `clubs` straight from the Team sheet row — don't
-   re-ask. Which club page-sets survive on this clone is driven entirely
-   by this field.
-3. **Contact/booking**: phone and `calendly_url` also come from the Team
-   sheet row (Phone, Booking Link) — reuse, don't re-ask. Personal email
-   is new — ask for it; it drives the JSON-LD, footer mailto, and *all*
-   form-alert routing for this site.
-4. **Service area**: free text like "Serving clients across Texas" — no
-   street address is ever collected or shown, confirmed decision.
-5. **Legal/compliance** — ask this precisely, it's compliance-sensitive:
-   *"Is [Name] operating under their own separately-licensed agency, or
-   as a Hanson Insurance, LLC advisor (optionally using a marketing/DBA
-   name)?"* If separately licensed: collect `legal_name` and set
-   `is_separate_entity: true`. If just a DBA under Hanson: set `dba_name`
-   only, leave `legal_name` blank (defaults to "Hanson Insurance, LLC"),
-   `is_separate_entity: false`. Do not guess this — if genuinely unsure,
-   ask Mark rather than assuming either answer.
-6. **Domain**: do they already own one, or need to buy one? If buying,
-   **pause here** — domain purchase is their own external action, not
-   something this skill does. Resume once they have it.
-7. **Social** (optional, each independent): only fill in platforms this
-   agent actually has. Never default to Hanson's own accounts.
-8. **Content overrides** (optional): a `featured_testimonial` (name,
-   location, club, quote, stars) to replace the default "Read what
-   clients say →" link-only teaser; a `hero_video` override.
+```bash
+python3 tools/intake_to_config.py --list                       # see who's submitted
+python3 tools/intake_to_config.py --name "Tia Pruett" --out tools/agent-tia-pruett.json
+```
 
-Write it all to a JSON file matching the schema, e.g.
+**Review the output before generating** — the converter deliberately
+does not silently resolve the compliance-sensitive fields for you:
+- `bio_paragraphs` — read it, it's the agent's own words, not yours
+- If `is_separate_entity` is `true`, the converter adds a
+  `_REVIEW_legal_name` note — the form only collects a "Business/Brand
+  Name," which may not be their exact legal entity name. Confirm it (or
+  correct it) before generating, then delete the `_REVIEW_...` key.
+- If the agent's `team_sheet_match` came back `no` (shown in `--list`
+  and the console output), their Team-sheet row still needs adding
+  before this can ship — same requirement as Step 1.
+
+**Fallback path: ask them yourself.** If self-serve doesn't fit (or the
+form isn't reachable for some reason), collect the same fields directly
+in conversation and write the JSON by hand — reference
+`tools/clone_config.schema.json` for the full field list. `clubs`,
+`phone`, and `calendly_url` should come from the Team sheet row, not be
+re-asked. `featured_testimonial` and `hero_video` are curation calls the
+self-serve form doesn't collect either way — add them to the config
+yourself if wanted, they're optional.
+
+Either path ends the same way: a JSON file matching the schema, e.g.
 `tools/agent-{slug}.json` (see `tools/pilot-tia-pruett.json` and
 `tools/pilot-cameron-vigil.json` for real worked examples — one an
 all-clubs Hanson advisor, one a medicare-only separate-DBA entity).

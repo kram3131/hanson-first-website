@@ -48,6 +48,9 @@
        review — it is NOT the same as the "Testimonials" tab that
        drives the live testimonials page. Copy an entry over to
        "Testimonials" only after reviewing it.)
+     - Agent Intake Submissions  (from agent-intake.html — one row
+       per team member requesting their own site. Turn a row into
+       a ready generator config with tools/intake_to_config.py.)
 
    ── RE-DEPLOYING AFTER EDITS ────────────────────────────────
    If you ever edit this script later, use Deploy → Manage
@@ -65,7 +68,8 @@ var TAB_MAP = {
   lifequote:   "Life Quote Requests",
   soa:         "SOA Requests",
   newsletter:  "Newsletter Signups",
-  testimonial: "Testimonial Submissions"
+  testimonial: "Testimonial Submissions",
+  agentIntake: "Agent Intake Submissions"  // agent-intake.html — see tools/intake_to_config.py
 };
 
 // Who gets an email alert for each new submission. Comma-separated
